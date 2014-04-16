@@ -1,0 +1,128 @@
+<!doctype html>
+<title>Squirrel.js Documentation</title>
+<meta name="viewport" content="width=device-width">
+<link href="example.css" rel="stylesheet" type="text/css">
+
+<div id="container">
+
+	<div class="header">
+		<div class="wrap">
+			<h1>Squirrel.js</h1>
+			<h3>Improve form usability with this tiny jQuery plugin that temporarily stores field values in HTML5 sessionStorage as users type.</h3>
+		</div>
+	</div>
+
+	<a name="about"></a>
+	<div class="block grey-light">
+		<div class="wrap">
+
+			<h2>What is it?</h2>
+			<p>Squirrel.js is a very simple jQuery plugin that uses features of HTML5 to improve user experience by making forms more forgiving. Need more? Picture this - you're filling out a really long web form, and you've filled out about 75% of it. You click outside of the field you're in and scroll to review your entries. OOPS, you (or your cat) bumped the backspace key. Hello, page you just visited - goodbye all the values in that form, right?</p>
+			<p>If the site is using Squirrel.js, all the info you entered would pop right back in when you get back to the form - because it temporarily stores the information from the form as you type in fields or change values. Check out a quick example, or find out how to use it on this page!</p>
+
+		</div>
+	</div>
+
+	<a name="example"></a>
+	<div class="block grey-lighter">
+		<div class="wrap">
+
+			<h2>A Quick Example</h2>			
+			<p>The example form below will store values in the form as you type or change them - so that if you refresh the page or navigate away and return, the things you entered will still be there. It clears when the user clears or submits the form, otherwise it will last until the browser window is closed.</p>
+
+			<form action="/" method="post" class="squirrel">
+				<div class="grid-row">
+					<div class="col4">
+						<p><strong>Example Field 1</strong><br>
+							<input type="text" name="test1" value=""></p>
+					</div>
+					<div class="col4">
+						<p><strong>Example Field 2</strong><br>
+							<input type="text" name="test2" value=""></p>
+					</div>
+					<div class="col4">
+						<p><strong>Example Field 3</strong><br>
+							<input type="text" name="test3" value=""></p>
+					</div>
+				</div>
+				<div class="grid-row">
+					<div class="col6">
+						<p><strong>Example Field 4</strong><br>
+							<input type="text" name="test4" value=""></p>
+					</div>
+					<div class="col6">
+						<p><strong>Example Field 5</strong><br>
+							<input type="text" name="test5" value=""></p>
+					</div>
+				</div>
+				<div class="grid-row">
+					<div class="col6">
+						<p><strong>Example Field 6</strong><br>
+							<input type="text" name="test6" value=""></p>
+					</div>
+					<div class="col6">
+						<p><strong>Example Field 7</strong><br>
+							<input type="text" name="test7" value=""></p>
+					</div>
+				</div>
+				<div class="grid-row">
+					<div class="col12">
+						<p><strong>Example Field 8</strong><br>
+							<textarea name="test8"></textarea></p>
+					</div>
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+	<a name="how-to"></a>
+	<div class="block grey-light">
+		<div class="wrap">
+
+			<h2>How To Squirrel</h2>			
+			<p>Ok, you're sold (yaay! :D), now how is this done? Simple.</p>
+			<script src="https://gist.github.com/jpederson/10656984.js"></script>
+
+		</div>
+	</div>
+	
+	<a name="download"></a>
+	<div class="block grey">
+		<div class="wrap">
+
+			<h2>Download Squirrel.js</h2>
+			<p>Visit the project on Github for updates or just download the source and dig in!</p>
+			<p class="buttons"><a href="https://github.com/jpederson/Squirrel.js/" target="_blank" class="btn">Squirrel.js on Github</a> <a href="https://github.com/jpederson/Squirrel.js/archive/master.zip" target="_blank" class="btn gold">Download Latest</a></p>
+
+			<div class="clear"></div>
+
+		</div>
+	</div>
+
+	<a name="author"></a>
+	<div class="block gold footer">
+		<div class="wrap">
+			<h2>About the Author</h2>
+			<div class="fifty">
+				<p>Built with care for <strong>free</strong> by me, <a href="http://jpederson.com" target="_blank">James Pederson</a>.</p>
+				<p>I'm a web developer and Credit Union advocate from Madison, WI. I'm also available for hire, <a href="http://jpederson.com/">get in touch</a> so we can discuss your project.</p>
+			</div>
+			<div class="fifty">
+				<p>Did my script help you? Buy me a beer to show me some love! Also, visit my site and email me to let me know your thoughts.</p>
+				<p>
+				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+					<input type="hidden" name="cmd" value="_s-xclick">
+					<input type="hidden" name="hosted_button_id" value="BNAQJ6MC449RQ">
+					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+					</form>
+				</p>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</div>
+
+</div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="jquery.squirrel.min.js"></script>
