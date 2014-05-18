@@ -9,5 +9,5 @@ To get started, simply include the plugin after your jQuery library is loaded, a
 $(".my-form").squirrel();
 ```
 
-### [Demo](http://squirreljs.com)
-### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
+#### [Demo](http://squirreljs.com)
+#### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
