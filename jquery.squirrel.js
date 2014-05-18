@@ -36,7 +36,7 @@
 						value = ( typeof( value ) !== "undefined" ? value : null );
 
 						// get the squirrel storage object
-						var store = JSON.parse( sessionStorage.getItem( "squirrel" ) ),
+						var store = JSON.parse( sessionStorage.getItem( options.storage_key ) ),
 							append = {};
 
 						if ( store == null ) {
@@ -53,7 +53,7 @@
 							store = $.extend( store, append );
 
 							// session the squirrel store again.
-							sessionStorage.setItem( "squirrel", JSON.stringify( store ) );
+							sessionStorage.setItem( options.storage_key, JSON.stringify( store ) );
 
 						}
 
@@ -66,10 +66,7 @@
 
 					// clear the stash
 					unstash = function() {
-
-						// remove our sessionStorage item
-						sessionStorage.removeItem( "squirrel" );
-						
+						sessionStorage.removeItem( options.storage_key );
 					};
 
 
@@ -143,12 +140,11 @@
     });
 
 
-
     // some default options for squirrel.js
     $.fn.squirrel.options = {
-    	clear_on_submit: true
+    	clear_on_submit: true,
+    	storage_key: "squirrel"
     };
-
 
 
 })( jQuery, window, document );
