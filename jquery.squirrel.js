@@ -29,17 +29,68 @@
 	            // we're doin' nothing if we don't have sessionStorage.
 				if ( window.sessionStorage ) {
 
-					// initially load all values from the sessionStorage
-					restore_values( elem, options );
+					// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
+					// load text values from session storage
+					elem.find("input[type=text], textarea").each(function(){
+						var value = stash( $(this).attr( "name" ) );
+						if ( value !== null ) {
+							$(this).val( value );
+						}
+					});
 
-					// bind keyup and change events to field types, and store
-					// their values.
-					bind_events( elem, options );
+
+					// set select values on load
+					elem.find("select").each(function(){
+						var value = stash( $(this).attr( "name" ) );
+						if ( value !== null ) {
+							$(this).find("option").each(function(){ 
+								this.selected = ( this.value == value ); 
+							});
+						}
+					});
+
+
+					// radio buttons
+					elem.find("input[type=radio]").each(function(){
+						var value = stash( $(this).attr( "name" ) );
+						if ( value !== null ) {
+							this.checked = ( $(this).val() == value );
+						}
+					});
+
+
+					// checkboxes
+					elem.find("input[type=checkbox]").each(function(){
+						var value = stash( $(this).attr( "name" ) );
+						if ( value !== null ) {
+							this.checked = ( value == "yes" );
+						}
+					});
+
+
+					// UPDATE VALUES FOR ALL FIELDS ON CHANGE
+					// track changes in fields and store values as they're typed
+					elem.find("input, select, textarea").on( 'blur keyup change', function() {
+						stash( $(this).attr("name"), $(this).val() );
+					});
+
+
+					// when the clear button is clicked, clear the sessionStorage as well 
+					// so it doesn't creepily load next refresh.
+					elem.find("input[type=clear]").click(function(){
+						unstash();
+					});
+
+
+					// clear storage on submit as well.
+					elem.submit(function(){
+						if ( options.clear_on_submit ) {
+							unstash();
+						}
+					});
+
 
 				}
-
-				// set up validation
-				validate_form( elem, options );
 
 	        });
 
@@ -48,95 +99,56 @@
     });
 
 
-    // restore field values from sessionStorage
-    var restore_values = function( elem, options ) {
+	// stash or grab a value from our session store object.
+	stash = function( key, value ) {
+		value = ( typeof( value ) !== "undefined" ? value : null );
 
-		// load text values from session storage
-		elem.find("input[type=text], textarea").each(function(){
-			var value = sessionStorage.getItem( $(this).attr( "name" ) );
-			if ( value !== null ) {
-				$(this).val( value );
+		// we do nothing without sessionStorage
+		if ( window.sessionStorage ) {
+
+			// get the squirrel storage object
+			var store = JSON.parse( sessionStorage.getItem( "squirrel" ) ),
+				append = {};
+
+			if ( store == null ) {
+				store = {};
 			}
-		});
 
-
-		// set select values on load
-		elem.find("select").each(function(){
-			var value = sessionStorage.getItem( $(this).attr( "name" ) );
+			// if value a value is specified
 			if ( value !== null ) {
-				$(this).find("option").each(function(){ 
-					this.selected = ( this.value == value ); 
-				});
+
+				// add the new value to the object we'll append to the store object.
+				append[key] = value;
+
+				// extend the squirrel store object
+				$.extend( store, append );
+
+				// session the squirrel store again.
+				sessionStorage.setItem( "squirrel", JSON.stringify( store ) );
+
 			}
-		});
+
+			// return the store value if the store isn't empty and the key exists.
+			// else return empty strings
+			return ( store !== null ? ( typeof( store[key] ) !== "undefined" ? store[key] : "" ) : "" );
+
+		}
+
+	},
 
 
-		// radio buttons
-		elem.find("input[type=radio]").each(function(){
-			var value = sessionStorage.getItem( $(this).attr( "name" ) );
-			if ( value !== null ) {
-				this.checked = ( $(this).val() == value );
-			}
-		});
-
-
-		// checkboxes
-		elem.find("input[type=checkbox]").each(function(){
-			var value = sessionStorage.getItem( $(this).attr( "name" ) );
-			if ( value !== null ) {
-				this.checked = ( value == "yes" );
-			}
-		});
-
-    };
-
-
-    // event bindings
-    var bind_events = function( elem, options ) {
-
-		// track changes in fields and store values as they're typed
-		elem.find("input, select, textarea").on( 'blur keyup change', function() {
-			store_field( $(this) );
-		});
-
-		// when the clear button is clicked, clear the sessionStorage as well 
-		// so it doesn't creepily load next refresh.
-		elem.find("input[type=clear]").click(function(){
-			sessionStorage.clear();
-		});
-
-
-    };
-
-
-    // store field
-    var store_field = function( field, options ){
-
-    	// if we have session storage
-    	if ( window.sessionStorage ) {
-
-	    	// store some values.
-	    	var field_name = field.attr( "name" ),
-	    		field_type = field.attr( "type" ),
-	    		field_value = field.val();
-
-	    	// if it's a checkbox, we've got to set the value differently
-	    	if ( field_type === "checkbox" ) {
-				field_value = ( field.is(":checked") ? "yes" : "no" );
-	    	}
-
-			// set the item in session storage
-			sessionStorage.setItem( field_name, field_value );
-
-    	}
-
+	// clear the stash
+	unstash = function() {
+		if ( window.sessionStorage ) {
+			sessionStorage.removeItem( "squirrel" );
+		}
 	};
+
 
 
     // some default options for squirrel.js
     $.fn.squirrel.options = {
-    	clear_on_submit: true,
-        onValidate: function ( elem, data ){}
+    	clear_on_submit: true
     };
 
 
