@@ -18,6 +18,7 @@
             // parameter we pass into this function.
 			options = $.extend( $.fn.squirrel.options, options );
 
+
             // Iterate through all the matching elements and return
             // the jquery object to preserve chaining.
 	        return this.each(function(){
@@ -28,6 +29,49 @@
 
 	            // we're doin' nothing if we don't have sessionStorage.
 				if ( window.sessionStorage ) {
+
+
+					// stash or grab a value from our session store object.
+					var stash = function( key, value ) {
+						value = ( typeof( value ) !== "undefined" ? value : null );
+
+						// get the squirrel storage object
+						var store = JSON.parse( sessionStorage.getItem( "squirrel" ) ),
+							append = {};
+
+						if ( store == null ) {
+							store = {};
+						}
+
+						// if value a value is specified
+						if ( value !== null ) {
+
+							// add the new value to the object we'll append to the store object.
+							append[key] = value;
+
+							// extend the squirrel store object
+							store = $.extend( store, append );
+
+							// session the squirrel store again.
+							sessionStorage.setItem( "squirrel", JSON.stringify( store ) );
+
+						}
+
+						// return the store value if the store isn't empty and the key exists.
+						// else return empty strings
+						return ( store !== null ? ( typeof( store[key] ) !== "undefined" ? store[key] : "" ) : "" );
+
+					},
+
+
+					// clear the stash
+					unstash = function() {
+
+						// remove our sessionStorage item
+						sessionStorage.removeItem( "squirrel" );
+						
+					};
+
 
 					// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 					// load text values from session storage
@@ -97,52 +141,6 @@
 	    }
 
     });
-
-
-	// stash or grab a value from our session store object.
-	stash = function( key, value ) {
-		value = ( typeof( value ) !== "undefined" ? value : null );
-
-		// we do nothing without sessionStorage
-		if ( window.sessionStorage ) {
-
-			// get the squirrel storage object
-			var store = JSON.parse( sessionStorage.getItem( "squirrel" ) ),
-				append = {};
-
-			if ( store == null ) {
-				store = {};
-			}
-
-			// if value a value is specified
-			if ( value !== null ) {
-
-				// add the new value to the object we'll append to the store object.
-				append[key] = value;
-
-				// extend the squirrel store object
-				$.extend( store, append );
-
-				// session the squirrel store again.
-				sessionStorage.setItem( "squirrel", JSON.stringify( store ) );
-
-			}
-
-			// return the store value if the store isn't empty and the key exists.
-			// else return empty strings
-			return ( store !== null ? ( typeof( store[key] ) !== "undefined" ? store[key] : "" ) : "" );
-
-		}
-
-	},
-
-
-	// clear the stash
-	unstash = function() {
-		if ( window.sessionStorage ) {
-			sessionStorage.removeItem( "squirrel" );
-		}
-	};
 
 
 
