@@ -85,7 +85,7 @@
 
 						// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 						// load text values from session storage
-						elem.find("input[type=text], textarea").each(function(){
+						elem.find("input[type=text][name], textarea[name]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								$(this).val( value );
@@ -94,7 +94,7 @@
 
 
 						// set select values on load
-						elem.find("select").each(function(){
+						elem.find("select[name]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								$(this).find("option").each(function(){ 
@@ -105,7 +105,7 @@
 
 
 						// radio buttons
-						elem.find("input[type=radio]").each(function(){
+						elem.find("input[type=radio][name]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								this.checked = ( $(this).val() == value );
@@ -114,7 +114,7 @@
 
 
 						// checkboxes
-						elem.find("input[type=checkbox]").each(function(){
+						elem.find("input[type=checkbox][name]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								this.checked = ( value == "yes" );
