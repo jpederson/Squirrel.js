@@ -30,7 +30,7 @@
 					append = {};
 
 				// if it doesn't exist, create an empty object.
-				if ( store == null ) {
+				if ( store === null ) {
 					store = {};
 				}
 

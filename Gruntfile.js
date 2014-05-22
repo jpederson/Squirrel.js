@@ -10,7 +10,7 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: ['jquery.squirrel.js'],
-                tasks: ['uglify'],
+                tasks: ['uglify','jshint'],
                 options: {
                     livereload: true,
                 },
@@ -44,6 +44,10 @@ module.exports = function(grunt) {
                     'jquery.squirrel.min.js': 'jquery.squirrel.js',
                 }
             }
+        },
+
+        jshint: {
+            all: ['jquery.squirrel.js']
         }
 
     });
