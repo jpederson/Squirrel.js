@@ -14,6 +14,9 @@
     	// naming our jquery plugin function
         squirrel: function( action, options ){
 
+			// check for JSON object
+			var has_json = ( typeof JSON === 'object' && typeof JSON.parse === 'function' );
+
             // set our options from the defaults, overriding with the
             // parameter we pass into this function.
 			options = $.extend( $.fn.squirrel.options, options );
@@ -23,6 +26,7 @@
 
 			// stash or grab a value from our session store object.
 			var stash = function( key, value ) {
+
 				value = ( typeof( value ) !== "undefined" ? value : null );
 
 				// get the squirrel storage object
@@ -68,12 +72,12 @@
             // the jquery object to preserve chaining.
 	        return this.each(function(){
 
-	            // we're doin' nothing if we don't have sessionStorage.
-				if ( window.sessionStorage ) {
+	            // we're doin' nothing if we don't have sessionStorage or JSON support.
+				if ( window.sessionStorage && has_json ) {
 
+	        		// clear the stash if clear is passed
 		        	if ( action == "clear" ) {
 		        		
-		        		// clear the stash if clear is passed
 		        		unstash();
 
 		        	} else {
