@@ -1,5 +1,4 @@
-Squirrel.js
-===========
+## Squirrel.js
 
 Store form values in HTML5 sessionStorage automatically as the user types with this jQuery plugin.
 
@@ -11,3 +10,16 @@ $(".my-form").squirrel();
 
 #### [Demo](http://squirreljs.com)
 #### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
+
+*****
+
+### Browser Support
+
+Browser support for both sessionStorage and JSON (required to parse/stringify data for session storage) are quite deep. If there's no support, the plugin fails silently.
+
+- Internet Explorer 8+
+- Firefox 28+
+- Chrome 31
+- Safari (OSX) 5.1+
+- Safari (iOS) 4.0+
+- Android 2.1+
