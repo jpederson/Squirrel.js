@@ -15,7 +15,7 @@ $(".my-form").squirrel();
 
 ### Browser Support
 
-Browser support for both sessionStorage and JSON (required to parse/stringify data for session storage) are quite deep. If there's no support, the plugin fails silently.
+Browser support for both sessionStorage and JSON (required to parse/stringify data for session storage) are quite deep. If there's no support, the plugin does nothing.
 
 - Internet Explorer 8+
 - Firefox 28+
