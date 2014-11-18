@@ -89,7 +89,7 @@
 
 						// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 						// load text values from session storage
-						elem.find("input[type=text][name], textarea[name]").each(function(){
+						elem.find("input[type=text][name], textarea[name], input[type=email][name]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								$(this).val( value );

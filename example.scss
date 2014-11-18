@@ -101,7 +101,7 @@ label {
 	color: lighten( $grey, 5% );
 }
 
-input[type=text], textarea {
+input[type=text], input[type=email], textarea {
 	box-sizing: border-box;
 	width: 100%;
 	padding: 10px 15px;
