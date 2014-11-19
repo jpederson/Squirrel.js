@@ -9,7 +9,7 @@
 ;(function( $, window, document, undefined ){
 
     // let's start our plugin logic
-    $.extend($.fn, {
+    $.extend( $.fn, {
 
     	// naming our jquery plugin function
         squirrel: function( action, options ){
@@ -89,7 +89,7 @@
 
 						// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 						// load text values from session storage
-						elem.find("input[type=text][name], textarea[name], input[type=email][name]").each(function(){
+						elem.find("input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]").each(function(){
 							var value = stash( $(this).attr( "name" ) );
 							if ( value !== null ) {
 								$(this).val( value );
