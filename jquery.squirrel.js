@@ -30,7 +30,7 @@
 				value = ( typeof( value ) !== "undefined" ? value : null );
 
 				// get the squirrel storage object
-				var store = JSON.parse( sessionStorage.getItem( options.storage_key ) ),
+				var store = JSON.parse( ( options.storage_method == 'local' ? localStorage.getItem( options.storage_key ) : sessionStorage.getItem( options.storage_key ) ) ),
 					append = {};
 
 				// if it doesn't exist, create an empty object.
@@ -48,7 +48,11 @@
 					store = $.extend( store, append );
 
 					// session the squirrel store again.
-					sessionStorage.setItem( options.storage_key, JSON.stringify( store ) );
+					if ( options.storage_method == 'local' ) {
+						localStorage.setItem( options.storage_key, JSON.stringify( store ) );
+					} else {
+						sessionStorage.setItem( options.storage_key, JSON.stringify( store ) );
+					}
 
 				}
 
@@ -63,7 +67,11 @@
 			unstash = function() {
 
 				// clear value for our storage key
-				sessionStorage.removeItem( options.storage_key );
+				if ( options.storage_method == 'local' ) {
+					localStorage.removeItem( options.storage_key );
+				} else {
+					sessionStorage.removeItem( options.storage_key );
+				}
 
 			};
 
@@ -73,7 +81,7 @@
 	        return this.each(function(){
 
 	            // we're doin' nothing if we don't have sessionStorage or JSON support.
-				if ( window.sessionStorage && has_json ) {
+				if ( ( window.sessionStorage || window.localStorage ) && has_json ) {
 
 	        		// clear the stash if clear is passed
 		        	if ( action == "clear" ) {
@@ -162,7 +170,8 @@
     // some default options for squirrel.js
     $.fn.squirrel.options = {
     	clear_on_submit: true,
-    	storage_key: "squirrel"
+    	storage_method: 'session',
+    	storage_key: 'squirrel'
     };
 
 

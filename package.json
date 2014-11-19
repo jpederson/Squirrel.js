@@ -1,6 +1,6 @@
 {
     "name" : "squirreljs",
-    "version" : "0.0.1",
+    "version" : "0.1.0",
     "repository": {
         "type": "git",
         "url": "git@github.com:jpederson/Squirrel.js.git"

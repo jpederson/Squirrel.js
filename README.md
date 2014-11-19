@@ -11,6 +11,8 @@ $(".my-form").squirrel();
 #### [Demo](http://squirreljs.com)
 #### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
 
+See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
+
 *****
 
 ### Browser Support
