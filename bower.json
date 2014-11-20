@@ -1,0 +1,27 @@
+{
+  "name": "squirrel.js",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jpederson/Squirrel.js",
+  "authors": [
+    "James Pederson <james@jpederson.com>"
+  ],
+  "description": "Automatically save form values in sessionStorage or localStorage as the user types, and restore them in case they have to reload or navigate away from the page.",
+  "main": "jquery.squirrel.js",
+  "keywords": [
+    "localStorage",
+    "sessionStorage",
+    "form",
+    "caching",
+    "user",
+    "experience"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "lib",
+    "test",
+    "tests"
+  ]
+}
