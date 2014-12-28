@@ -5,13 +5,38 @@ Store form values in HTML5 sessionStorage automatically as the user types with t
 To get started, simply include the plugin after your jQuery library is loaded, and add a class of `squirrel` to your form. The plugin does its own bindings for that class, otherwise you can set it up to target your forms using the code below:
 
 ```js
-$(".my-form").squirrel();
+$('.my-form').squirrel();
 ```
 
 #### [Demo](http://squirreljs.com)
 #### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
 
 See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
+
+*****
+
+### Supported Fields
+
+The following types of fields are supported by Squirrel.js.
+
+- `input[type=text]`
+- `input[type=radio]`
+- `input[type=checkbox]`
+- `input[type=number]` (value must be numeric to refill correctly)
+- `input[type=email]`
+- `input[type=date]`
+- `input[type=datetime]`
+- `input[type=datetime-local]`
+- `input[type=color]`
+- `input[type=range]`
+- `input[type=month]`
+- `input[type=week]`
+- `input[type=time]`
+- `input[type=search]`
+- `input[type=tel]`
+- `input[type=url]`
+- `textarea`
+- `select`
 
 *****
 
