@@ -131,19 +131,10 @@
                         });
 
                         // checkboxes
-                        $form.find('input[type=checkbox][name]').each(function() {
-                            var $elem = $(this),
-                                chkval = $elem.attr('value');
-                            if (typeof chkval !== 'string') {
-                                chkval = '';
-                            }
-
-                            var value = stash(storage_key, $elem.attr('name') + chkval);
-                            if (value !== null && value !== this.checked) {
-                                this.checked = (value === true);
-                                $elem.trigger('change');
-                            }
-                        });
+                        elem.find('option:not(:checked)').filter(function( option ) {
+                            var $option = $(this);
+                            return ($option.val() === option || $option.html() === option );
+                        }).prop('selected', true).trigger('change');
 
                         // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                         // track changes in fields and store values as they're typed
