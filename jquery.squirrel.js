@@ -76,76 +76,78 @@
                 return this.each(function() {
 
                     // we're doin' nothing if we don't have a valid sessionStorage or localStorage object.
-                    if (window.sessionStorage || window.localStorage) {
+                    if (typeof window.sessionStorage === 'undefined' || typeof window.localStorage  === 'undefined') {
 
-                        // clear the stash if clear is passed
-                        if (action === 'clear') {
-
-                            unstash();
-
-                        } else {
-
-                            // Store a jQuery object for our element so we can use it
-                            // inside our other bindings.
-                            var elem = $(this);
-
-                            // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
-                            // load text values from session storage
-                            elem.find('input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]').each(function() {
-                                var value = stash($(this).attr('name'));
-                                if (value !== null) {
-                                    $(this).val(value);
-                                }
-                            });
-
-                            // set select values on load
-                            elem.find('select[name]').each(function() {
-                                var value = stash($(this).attr('name'));
-                                if (value !== null) {
-                                    $(this).find('option').each(function() {
-                                        this.selected = (this.value === value);
-                                    });
-                                }
-                            });
-
-                            // radio buttons
-                            elem.find('input[type=radio][name]').each(function() {
-                                var value = stash($(this).attr('name'));
-                                if (value !== null) {
-                                    this.checked = ($(this).val() === value);
-                                }
-                            });
-
-                            // checkboxes
-                            elem.find('input[type=checkbox][name]').each(function() {
-                                var value = stash($(this).attr('name'));
-                                if (value !== null) {
-                                    this.checked = (value === true);
-                                }
-                            });
-
-                            // UPDATE VALUES FOR ALL FIELDS ON CHANGE
-                            // track changes in fields and store values as they're typed
-                            elem.find('input, select, textarea').on('blur keyup change', function() {
-                                stash($(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
-                            });
-
-                            // when the clear button is clicked, clear the sessionStorage as well
-                            // so it doesn't creepily load next refresh.
-                            elem.find('input[type=clear]').click(function() {
-                                unstash();
-                            });
-
-                            // clear storage on submit as well.
-                            elem.submit(function() {
-                                if (options.clear_on_submit) {
-                                    unstash();
-                                }
-                            });
-
-                        } // end default action
+                    	return;
 
                     } // if sessionStorage
+
+                    // clear the stash if clear is passed
+                    if (action === 'clear') {
+
+                        unstash();
+
+                    } else {
+
+                        // Store a jQuery object for our element so we can use it
+                        // inside our other bindings.
+                        var elem = $(this);
+
+                        // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
+                        // load text values from session storage
+                        elem.find('input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]').each(function() {
+                            var value = stash($(this).attr('name'));
+                            if (value !== null) {
+                                $(this).val(value);
+                            }
+                        });
+
+                        // set select values on load
+                        elem.find('select[name]').each(function() {
+                            var value = stash($(this).attr('name'));
+                            if (value !== null) {
+                                $(this).find('option').each(function() {
+                                    this.selected = (this.value === value);
+                                });
+                            }
+                        });
+
+                        // radio buttons
+                        elem.find('input[type=radio][name]').each(function() {
+                            var value = stash($(this).attr('name'));
+                            if (value !== null) {
+                                this.checked = ($(this).val() === value);
+                            }
+                        });
+
+                        // checkboxes
+                        elem.find('input[type=checkbox][name]').each(function() {
+                            var value = stash($(this).attr('name'));
+                            if (value !== null) {
+                                this.checked = (value === true);
+                            }
+                        });
+
+                        // UPDATE VALUES FOR ALL FIELDS ON CHANGE
+                        // track changes in fields and store values as they're typed
+                        elem.find('input, select, textarea').on('blur keyup change', function() {
+                            stash($(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
+                        });
+
+                        // when the clear button is clicked, clear the sessionStorage as well
+                        // so it doesn't creepily load next refresh.
+                        elem.find('input[type=clear]').click(function() {
+                            unstash();
+                        });
+
+                        // clear storage on submit as well.
+                        elem.submit(function() {
+                            if (options.clear_on_submit) {
+                                unstash();
+                            }
+                        });
+
+                    } // end default action
 
                 }); // return each plugin call
 
