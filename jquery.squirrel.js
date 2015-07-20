@@ -54,8 +54,8 @@
                         }
 
                         // return the store value if the store isn't empty and the key exists.
-                        // else return empty strings
-                        return (store !== null ? (typeof(store[key]) !== 'undefined' ? store[key] : '') : '');
+                        // else return null
+                        return (store !== null ? (typeof(store[key]) !== 'undefined' ? store[key] : null) : null);
 
                     },
 
