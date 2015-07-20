@@ -75,7 +75,7 @@
             // the jquery object to preserve chaining.
 	        return this.each(function(){
 
-	            // we're doin' nothing if we don't have sessionStorage or JSON support.
+	            // we're doin' nothing if we don't have a valid sessionStorage or localStorage object.
 				if ( window.sessionStorage || window.localStorage ) {
 
 	        		// clear the stash if clear is passed
