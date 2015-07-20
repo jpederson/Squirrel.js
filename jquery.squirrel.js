@@ -3,7 +3,7 @@
  * http://github.com/jpederson/Squirrel.js
  * Author: James Pederson (jpederson.com)
  * Licensed under the MIT, GPL licenses.
- * Version: 0.1.3
+ * Version: 0.1.4
  */
 ; (function($, window, document, undefined) {
 
