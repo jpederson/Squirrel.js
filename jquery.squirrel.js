@@ -98,17 +98,19 @@
                     // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
                     // load text values from session storage
                     elem.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
-                        var value = stash($(this).attr('name'), null, storage_key);
-                        if (value !== null && !$(this).is('[readonly]') && $(this).is(':enabled')) {
-                            $(this).val(value);
+                        var $this = $(this),
+                        value = stash($this.attr('name'), null, storage_key);
+                        if (value !== null && !$this.is('[readonly]') && $this.is(':enabled')) {
+                            $this.val(value);
                         }
                     });
 
                     // set select values on load
                     elem.find('select[name]').each(function() {
-                        var value = stash($(this).attr('name'), null, storage_key);
+                        var $this = $(this),
+                        value = stash($this.attr('name'), null, storage_key);
                         if (value !== null) {
-                            $(this).find('option').each(function() {
+                            $this.find('option').each(function() {
                                 this.selected = (this.value === value);
                             });
                         }
@@ -116,15 +118,17 @@
 
                     // radio buttons
                     elem.find('input[type=radio][name]').each(function() {
-                        var value = stash($(this).attr('name'), null, storage_key);
+                        var $this = $(this),
+                        value = stash($this.attr('name'), null, storage_key);
                         if (value !== null) {
-                            this.checked = ($(this).val() === value);
+                            this.checked = ($this.val() === value);
                         }
                     });
 
                     // checkboxes
                     elem.find('input[type=checkbox][name]').each(function() {
-                        var value = stash($(this).attr('name'), null, storage_key);
+                        var $this = $(this),
+                        value = stash($this.attr('name'), null, storage_key);
                         if (value !== null) {
                             this.checked = (value === true);
                         }
@@ -133,7 +137,8 @@
                     // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                     // track changes in fields and store values as they're typed
                     elem.find('input[type!=file], select, textarea').on('blur keyup change', function() {
-                        stash($(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val(), storage_key);
+                        var $this = $(this);
+                        stash($this.attr('name'), this.type === 'checkbox' ? $this.prop('checked') : $this.val(), storage_key);
                     });
 
                     // when the reset button is clicked, clear the sessionStorage as well
