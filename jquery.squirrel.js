@@ -147,7 +147,7 @@
 
                         // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                         // track changes in fields and store values as they're typed
-                        form.find('input[type!=file], select, textarea').on('blur keyup change', function() {
+                        form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
                             var elem = $(this),
                                 stashname = (this.type === 'checkbox' && elem.attr('value') !== undefined) ? elem.attr('name') + elem.attr('value') : elem.attr('name');
                             stash(storage_key, stashname, this.type === 'checkbox' ? elem.prop('checked') : elem.val());
