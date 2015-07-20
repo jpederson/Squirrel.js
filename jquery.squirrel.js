@@ -76,7 +76,7 @@
                 return this.each(function() {
 
                     // we're doin' nothing if we don't have a valid sessionStorage or localStorage object.
-                    if (typeof window.sessionStorage === 'undefined' || typeof window.localStorage  === 'undefined') {
+                    if (typeof(window.sessionStorage) === 'undefined' || typeof(window.localStorage)  === 'undefined') {
 
                     	return;
 
