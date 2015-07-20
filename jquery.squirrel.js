@@ -5,8 +5,7 @@
  * Licensed under the MIT, GPL licenses.
  * Version: 1.0.0
  */
-;
-(function($, window, document, undefined) {
+; (function($, window, document, undefined) {
 
     // let's start our plugin logic
     $.extend($.fn, {
