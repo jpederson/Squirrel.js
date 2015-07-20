@@ -115,7 +115,7 @@
                                 // if value is not enumerable then make it enumerable. Then for each value in the array, find the option
                                 // with that value and set the property called selected to true
                                 $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
-                                    $elem.find('option[value=' + option + ']:not(:checked)').prop('selected', true).trigger('change');
+                                    $elem.find('option[value="' + option + '"]:not(:checked)').prop('selected', true).trigger('change');
                                 });
                             }
                         });
