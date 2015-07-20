@@ -21,13 +21,13 @@
             action = (typeof(action) !== 'undefined' ? action : 'init');
 
             // stash or grab a value from our session store object.
-            var stash = function(key, value) {
+            var stash = function(storage_key, key, value) {
 
-                value = (typeof(value) !== 'undefined' ? value : null);
+                value = typeof value !== 'undefined' ? value : null;
 
                 // get the squirrel storage object
                 var storage_method = options.storage_method.toLowerCase(),
-                    store = JSON.parse((storage_method === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
+                    store = JSON.parse((storage_method === 'local' ? localStorage.getItem(storage_key) : sessionStorage.getItem(storage_key))),
                     append = {};
 
                 // if it doesn't exist, create an empty object.
@@ -46,9 +46,9 @@
 
                     // session the squirrel store again.
                     if (storage_method === 'local') {
-                        localStorage.setItem(options.storage_key, JSON.stringify(store));
+                        localStorage.setItem( storage_key, JSON.stringify(store) );
                     } else {
-                        sessionStorage.setItem(options.storage_key, JSON.stringify(store));
+                        sessionStorage.setItem( storage_key, JSON.stringify(store) );
                     }
 
                 }
@@ -60,13 +60,13 @@
             },
 
             // clear the sessionStorage key based on the options specified.
-            unstash = function() {
+            unstash = function( storage_key ) {
 
                 // clear value for our storage key
                 if (options.storage_method.toLowerCase() === 'local') {
-                    localStorage.removeItem(options.storage_key);
+                    localStorage.removeItem( storage_key );
                 } else {
-                    sessionStorage.removeItem(options.storage_key);
+                    sessionStorage.removeItem( storage_key );
                 }
 
             };
@@ -82,24 +82,25 @@
 
                 } // if sessionStorage
 
+
+                // Store a jQuery object for the form so we can use it
+                // inside our other bindings.
+                var elem = $(this);
+
+	            // check for data-squirrel attribute
+	            var storage_key = elem.attr('data-squirrel') ? elem.data('squirrel') : options.storage_key;
+
                 // clear the stash if clear is passed
                 if (action.toLowerCase() === 'clear') {
 
-                    unstash();
+                    unstash( storage_key );
 
                 } else {
-
-                    // Store a jQuery object for our element so we can use it
-                    // inside our other bindings.
-                    var elem = $(this);
-
-		            // check for data-squirrel attribute
-		            options.storage_key = ( elem.attr('data-squirrel') ? elem.data('squirrel') : options.storage_key );
 
                     // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
                     // load text values from session storage
                     elem.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
-                        var value = stash($(this).attr('name'));
+                        var value = stash(storage_key, $(this).attr('name'));
                         if (value !== null && !$(this).is('[readonly]') && $(this).is(':enabled')) {
                             $(this).val(value);
                         }
@@ -107,7 +108,7 @@
 
                     // set select values on load
                     elem.find('select[name]').each(function() {
-                        var value = stash($(this).attr('name'));
+                        var value = stash(storage_key, $(this).attr('name'));
                         if (value !== null) {
                             $(this).find('option').each(function() {
                                 this.selected = (this.value === value);
@@ -117,7 +118,7 @@
 
                     // radio buttons
                     elem.find('input[type=radio][name]').each(function() {
-                        var value = stash($(this).attr('name'));
+                        var value = stash(storage_key, $(this).attr('name'));
                         if (value !== null) {
                             this.checked = ($(this).val() === value);
                         }
@@ -125,7 +126,7 @@
 
                     // checkboxes
                     elem.find('input[type=checkbox][name]').each(function() {
-                        var value = stash($(this).attr('name'));
+                        var value = stash(storage_key, $(this).attr('name'));
                         if (value !== null) {
                             this.checked = (value === true);
                         }
@@ -134,19 +135,19 @@
                     // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                     // track changes in fields and store values as they're typed
                     elem.find('input[type!=file], select, textarea').on('blur keyup change', function() {
-                        stash($(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
+                        stash(storage_key, $(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
                     });
 
                     // when the reset button is clicked, clear the sessionStorage as well
                     // so it doesn't creepily load on next refresh.
                     elem.find('button[type=reset], input[type=reset]').click(function() {
-                        unstash();
+                        unstash( storage_key );
                     });
 
                     // clear storage on submit as well.
                     elem.submit(function() {
                         if (options.clear_on_submit) {
-                            unstash();
+                            unstash( storage_key );
                         }
                     });
 
