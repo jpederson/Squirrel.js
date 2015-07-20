@@ -85,10 +85,10 @@
 
                     // Store a jQuery object for the form so we can use it
                     // inside our other bindings.
-                    var form = $(this);
+                    var $form = $(this);
 
                     // check for data-squirrel attribute
-                    var storage_key = form.attr('data-squirrel') ? form.data('squirrel') : options.storage_key;
+                    var storage_key = $form.attr('data-squirrel') ? $form.data('squirrel') : options.storage_key;
 
                     // clear the stash if clear is passed
                     if (action.toLowerCase() === 'clear') {
@@ -99,68 +99,68 @@
 
                         // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
                         // load text values from session storage
-                        form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
-                            var elem = $(this),
-                                value = stash(storage_key, elem.attr('name'));
-                            if (value !== null && !elem.is('[readonly]') && elem.is(':enabled') && elem.val() !== value) {
-                                elem.val(value).trigger('change');
+                        $form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
+                            var $elem = $(this),
+                                value = stash(storage_key, $elem.attr('name'));
+                            if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
+                                $elem.val(value).trigger('change');
                             }
                         });
 
                         // set select values on load
-                        form.find('select[name]').each(function() {
-                            var elem = $(this),
-                                value = stash(storage_key, elem.attr('name'));
+                        $form.find('select[name]').each(function() {
+                            var $elem = $(this),
+                                value = stash(storage_key, $elem.attr('name'));
                             if (value !== null) {
                                 // if value is not enumerable then make it enumerable. Then for each value in the array, find the option
                                 // with that value and set the property called selected to true
                                 $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
-                                    elem.find('option[value=' + option + ']:not(:checked)').prop('selected', true).trigger('change');
+                                    $elem.find('option[value=' + option + ']:not(:checked)').prop('selected', true).trigger('change');
                                 });
                             }
                         });
 
                         // radio buttons
-                        form.find('input[type=radio][name]').each(function() {
-                            var elem = $(this),
-                                value = stash(storage_key, elem.attr('name'));
+                        $form.find('input[type=radio][name]').each(function() {
+                            var $elem = $(this),
+                                value = stash(storage_key, $elem.attr('name'));
                             if (value !== null && value !== this.checked) {
-                                this.checked = (elem.val() === value);
-                                elem.trigger('change');
+                                this.checked = ($elem.val() === value);
+                                $elem.trigger('change');
                             }
                         });
 
                         // checkboxes
-                        form.find('input[type=checkbox][name]').each(function() {
-                            var elem = $(this),
-                                chkval = elem.attr('value');
+                        $form.find('input[type=checkbox][name]').each(function() {
+                            var $elem = $(this),
+                                chkval = $elem.attr('value');
                             if (typeof chkval !== 'string') {
                                 chkval = '';
                             }
 
-                            var value = stash(storage_key, elem.attr('name') + chkval);
+                            var value = stash(storage_key, $elem.attr('name') + chkval);
                             if (value !== null && value !== this.checked) {
                                 this.checked = (value === true);
-                                elem.trigger('change');
+                                $elem.trigger('change');
                             }
                         });
 
                         // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                         // track changes in fields and store values as they're typed
-                        form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
-                            var elem = $(this),
-                                stashname = (this.type === 'checkbox' && elem.attr('value') !== undefined) ? elem.attr('name') + elem.attr('value') : elem.attr('name');
-                            stash(storage_key, stashname, this.type === 'checkbox' ? elem.prop('checked') : elem.val());
+                        $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
+                            var $elem = $(this),
+                                stashname = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
+                            stash(storage_key, stashname, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
                         });
 
                         // when the reset button is clicked, clear the sessionStorage as well
                         // so it doesn't creepily load on next refresh.
-                        form.find('button[type=reset], input[type=reset]').click(function() {
+                        $form.find('button[type=reset], input[type=reset]').click(function() {
                             unstash(storage_key);
                         });
 
                         // clear storage on submit as well.
-                        form.submit(function() {
+                        $form.submit(function() {
                             if (options.clear_on_submit) {
                                 unstash(storage_key);
                             }
