@@ -112,11 +112,10 @@
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
                             if (value !== null) {
-                                // if value is not enumerable then make it enumerable. Then for each value in the array, find the option
-                                // with that value and set the property called selected to true
-                                $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
-                                    $elem.find('option[value="' + option + '"]:not(:checked)').prop('selected', true).trigger('change');
-                                });
+                                $elem.find('option:not(:checked)').filter(function(option) {
+                                    var $option = $(this);
+                                    return ($option.val() === option || $option.html() === option);
+                                }).prop('selected', true).trigger('change');
                             }
                         });
 
