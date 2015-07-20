@@ -101,7 +101,7 @@
                         var $this = $(this),
                             value = stash($this.attr('name'), null, storage_key);
                         if (value !== null && !$this.is('[readonly]') && $this.is(':enabled')) {
-                            $this.val(value);
+                            $this.val(value).trigger('change');
                         }
                     });
 
