@@ -136,7 +136,7 @@
 
                         // when the clear button is clicked, clear the sessionStorage as well
                         // so it doesn't creepily load next refresh.
-                        elem.find('input[type=clear]').click(function() {
+                        elem.find('input[type=reset]').click(function() {
                             unstash();
                         });
 
