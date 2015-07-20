@@ -127,17 +127,17 @@
 
 						// checkboxes
 						elem.find("input[type=checkbox][name]").each(function(){
-							var value = stash( $(this).attr( "name" ) );
-							if ( value !== null ) {
-								this.checked = ( value == "yes" );
-							}
+    						var value = stash( $(this).attr( "name" ) );
+    						if ( value !== null ) {
+        						this.checked = ( value == true );
+    						}
 						});
 
 
 						// UPDATE VALUES FOR ALL FIELDS ON CHANGE
 						// track changes in fields and store values as they're typed
 						elem.find("input, select, textarea").on( 'blur keyup change', function() {
-							stash( $(this).attr("name"), $(this).val() );
+    						stash( $(this).attr("name"), this.type === "checkbox" ? $(this).prop('checked') : $(this).val());
 						});
 
 
