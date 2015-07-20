@@ -27,7 +27,7 @@
 
                         // get the squirrel storage object
                         var storage = options.storage_method.toLowerCase(),
-                        	store = JSON.parse((storage === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
+                            store = JSON.parse((storage === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
                             append = {};
 
                         // if it doesn't exist, create an empty object.
@@ -76,9 +76,9 @@
                 return this.each(function() {
 
                     // we're doin' nothing if we don't have a valid sessionStorage or localStorage object.
-                    if (typeof(window.sessionStorage) === 'undefined' || typeof(window.localStorage)  === 'undefined') {
+                    if (typeof(window.sessionStorage) === 'undefined' || typeof(window.localStorage) === 'undefined') {
 
-                    	return;
+                        return;
 
                     } // if sessionStorage
 
@@ -95,7 +95,7 @@
 
                         // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
                         // load text values from session storage
-                        elem.find('input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]').each(function() {
+                        elem.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
                             var value = stash($(this).attr('name'));
                             if (value !== null) {
                                 $(this).val(value);
