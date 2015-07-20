@@ -30,7 +30,7 @@
 				value = ( typeof( value ) !== 'undefined' ? value : null );
 
 				// get the squirrel storage object
-				var store = JSON.parse( ( options.storage_method == 'local' ? localStorage.getItem( options.storage_key ) : sessionStorage.getItem( options.storage_key ) ) ),
+				var store = JSON.parse( ( options.storage_method === 'local' ? localStorage.getItem( options.storage_key ) : sessionStorage.getItem( options.storage_key ) ) ),
 					append = {};
 
 				// if it doesn't exist, create an empty object.
@@ -48,7 +48,7 @@
 					store = $.extend( store, append );
 
 					// session the squirrel store again.
-					if ( options.storage_method == 'local' ) {
+					if ( options.storage_method === 'local' ) {
 						localStorage.setItem( options.storage_key, JSON.stringify( store ) );
 					} else {
 						sessionStorage.setItem( options.storage_key, JSON.stringify( store ) );
@@ -67,7 +67,7 @@
 			unstash = function() {
 
 				// clear value for our storage key
-				if ( options.storage_method == 'local' ) {
+				if ( options.storage_method === 'local' ) {
 					localStorage.removeItem( options.storage_key );
 				} else {
 					sessionStorage.removeItem( options.storage_key );
@@ -84,7 +84,7 @@
 				if ( ( window.sessionStorage || window.localStorage ) && has_json ) {
 
 	        		// clear the stash if clear is passed
-		        	if ( action == 'clear' ) {
+		        	if ( action === 'clear' ) {
 		        		
 		        		unstash();
 
@@ -110,7 +110,7 @@
 							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
 								$(this).find('option').each(function(){ 
-									this.selected = ( this.value == value ); 
+									this.selected = ( this.value === value ); 
 								});
 							}
 						});
@@ -120,7 +120,7 @@
 						elem.find('input[type=radio][name]').each(function(){
 							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
-								this.checked = ( $(this).val() == value );
+								this.checked = ( $(this).val() === value );
 							}
 						});
 
@@ -129,7 +129,7 @@
 						elem.find('input[type=checkbox][name]').each(function(){
     						var value = stash( $(this).attr( 'name' ) );
     						if ( value !== null ) {
-        						this.checked = ( value == true );
+        						this.checked = ( value === true );
     						}
 						});
 
