@@ -134,8 +134,8 @@
                             stash($(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
                         });
 
-                        // when the clear button is clicked, clear the sessionStorage as well
-                        // so it doesn't creepily load next refresh.
+                        // when the reset button is clicked, clear the sessionStorage as well
+                        // so it doesn't creepily load on next refresh.
                         elem.find('input[type=reset]').click(function() {
                             unstash();
                         });
