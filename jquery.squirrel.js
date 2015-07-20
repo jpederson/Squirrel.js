@@ -26,8 +26,8 @@
                         value = (typeof(value) !== 'undefined' ? value : null);
 
                         // get the squirrel storage object
-                        var storage = options.storage_method.toLowerCase(),
-                            store = JSON.parse((storage === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
+                        var storage_method = options.storage_method.toLowerCase(),
+                            store = JSON.parse((storage_method === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
                             append = {};
 
                         // if it doesn't exist, create an empty object.
@@ -45,7 +45,7 @@
                             store = $.extend(store, append);
 
                             // session the squirrel store again.
-                            if (storage === 'local') {
+                            if (storage_method === 'local') {
                                 localStorage.setItem(options.storage_key, JSON.stringify(store));
                             } else {
                                 sessionStorage.setItem(options.storage_key, JSON.stringify(store));
