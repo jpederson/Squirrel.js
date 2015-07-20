@@ -27,7 +27,8 @@
                         value = (typeof(value) !== 'undefined' ? value : null);
 
                         // get the squirrel storage object
-                        var store = JSON.parse((options.storage_method === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
+                        var storage = options.storage_method.toLowerCase(),
+                        	store = JSON.parse((storage === 'local' ? localStorage.getItem(options.storage_key) : sessionStorage.getItem(options.storage_key))),
                             append = {};
 
                         // if it doesn't exist, create an empty object.
@@ -45,7 +46,7 @@
                             store = $.extend(store, append);
 
                             // session the squirrel store again.
-                            if (options.storage_method === 'local') {
+                            if (storage === 'local') {
                                 localStorage.setItem(options.storage_key, JSON.stringify(store));
                             } else {
                                 sessionStorage.setItem(options.storage_key, JSON.stringify(store));
@@ -63,7 +64,7 @@
                     unstash = function() {
 
                         // clear value for our storage key
-                        if (options.storage_method === 'local') {
+                        if (options.storage_method.toLowerCase() === 'local') {
                             localStorage.removeItem(options.storage_key);
                         } else {
                             sessionStorage.removeItem(options.storage_key);
@@ -83,7 +84,7 @@
                     } // if sessionStorage
 
                     // clear the stash if clear is passed
-                    if (action === 'clear') {
+                    if (action.toLowerCase() === 'clear') {
 
                         unstash();
 
