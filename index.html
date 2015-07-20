@@ -1,174 +1,207 @@
-<!doctype html>
-<title>Squirrel.js Documentation</title>
-<meta name="viewport" content="width=device-width">
-<link href="example.css" rel="stylesheet" type="text/css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>Squirrel.js Documentation</title>
+
+    <!--Page Specific Metas-->
+    <meta name="description" content="Simply meet people differently"/>
+    <meta name="author" content="simpl"/>
+
+    <!--Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <!--Stylesheets-->
+    <link rel="stylesheet" href="example.css"/>
+</head>
+<body>
 
 <div id="container">
+    <div class="header">
+        <div class="wrap">
+            <h1>Squirrel.js</h1>
 
-	<div class="header">
-		<div class="wrap">
-			<h1>Squirrel.js</h1>
-			<h3>Improve form usability with this tiny jQuery plugin that temporarily stores field values in HTML5 sessionStorage as users type.</h3>
-		</div>
-	</div>
+            <h3>Improve form usability with this tiny jQuery plugin that temporarily stores field values in HTML5 sessionStorage as users type.</h3>
+        </div>
+    </div>
 
-	<div class="block grey-lighter">
-		<div class="wrap">
+    <div class="block grey-lighter">
+        <div class="wrap">
 
-			<h2>A Quick Example</h2>			
-			<p>The example form below will store values in the form as you type or change them - so that if you refresh the page or navigate away and return, the things you entered will still be there. It clears when the user clears or submits the form, otherwise it will last until the browser window is closed.</p>
+            <h2>A Quick Example</h2>
 
-			<form action="/" method="post" class="squirrel">
-				<div class="grid-row">
-					<div class="col4">
-						<p><strong>Example Text Field</strong><br>
-							<input type="text" name="test-text" value=""></p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Number Field</strong><br>
-							<input type="number" name="test-number" value=""></p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Email Field</strong><br>
-							<input type="email" name="test-email" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col4">
-						<p><strong>Example Radio Buttons</strong><br>
-							<input type="radio" name="test-radio" value="yes"> Yes <input type="radio" name="test-radio" value="no"> No </p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Range Field</strong><br>
-							<input type="range" name="test-range" value=""></p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Color Field</strong><br>
-							<input type="color" name="test-color" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col6">
-						<p><strong>Example Checkboxes</strong><br>
-							<input type="checkbox" name="test-checkbox" value="yes"> Option 1 <input type="checkbox" name="test-checkbox" value="no"> Option 2 </p>
-					</div>
-					<div class="col6">
-						<p><strong>Example Select List</strong><br>
-							<select name="test-select">
-								<option value="1">Option 1</option>
-								<option value="2">Option 2</option>
-								<option value="3">Option 3</option>
-								<option value="4">Option 4</option>
-							</select></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col6">
-						<p><strong>Example Date Field</strong><br>
-							<input type="date" name="test-date" value=""></p>
-					</div>
-					<div class="col6">
-						<p><strong>Example Datetime (Local) Field</strong><br>
-							<input type="datetime-local" name="test-datetime-local" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col4">
-						<p><strong>Example Month Field</strong><br>
-							<input type="month" name="test-month" value=""></p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Week Field</strong><br>
-							<input type="week" name="test-week" value=""></p>
-					</div>
-					<div class="col4">
-						<p><strong>Example Time Field</strong><br>
-							<input type="time" name="test-time" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col6">
-						<p><strong>Example Search Field</strong><br>
-							<input type="search" name="test-search" value=""></p>
-					</div>
-					<div class="col6">
-						<p><strong>Example Tel Field</strong><br>
-							<input type="tel" name="test-tel" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col12">
-						<p><strong>Example URL Field</strong><br>
-							<input type="url" name="test-url" value=""></p>
-					</div>
-				</div>
-				<div class="grid-row">
-					<div class="col12">
-						<p><strong>Example Textarea</strong><br>
-							<textarea name="test-textarea"></textarea></p>
-					</div>
-				</div>
-			</form>
+            <p>The example form below will store values in the form as you type or change them - so that if you refresh the page or navigate away and return, the things you entered will still be there. It clears when the user clears or submits the form,
+                otherwise it will last until the browser window is closed.</p>
 
-		</div>
-	</div>
+            <form action="/" method="post" class="squirrel">
+                <div class="grid-row">
+                    <div class="col4">
+                        <p><strong>Example Text Field</strong><br/>
+                            <input type="text" name="test-text" value=""></p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Number Field</strong><br/>
+                            <input type="number" name="test-number" value=""></p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Email Field</strong><br/>
+                            <input type="email" name="test-email" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col4">
+                        <p><strong>Example Radio Buttons</strong><br/>
+                            <input type="radio" name="test-radio" value="yes"> Yes <input type="radio" name="test-radio" value="no"> No </p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Range Field</strong><br/>
+                            <input type="range" name="test-range" value=""></p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Color Field</strong><br/>
+                            <input type="color" name="test-color" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col6">
+                        <p><strong>Example Checkboxes</strong><br/>
+                            <input type="checkbox" name="test-checkbox" value="yes"> Option 1 <input type="checkbox" name="test-checkbox" value="no"> Option 2 </p>
+                    </div>
+                    <div class="col6">
+                        <p><strong>Example Select List</strong><br/>
+                            <select name="test-select">
+                                <option value="1">Option 1</option>
+                                <option value="2">Option 2</option>
+                                <option value="3">Option 3</option>
+                                <option value="4">Option 4</option>
+                            </select></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col6">
+                        <p><strong>Example Date Field</strong><br/>
+                            <input type="date" name="test-date" value=""></p>
+                    </div>
+                    <div class="col6">
+                        <p><strong>Example Datetime (Local) Field</strong><br/>
+                            <input type="datetime-local" name="test-datetime-local" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col4">
+                        <p><strong>Example Month Field</strong><br/>
+                            <input type="month" name="test-month" value=""></p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Week Field</strong><br/>
+                            <input type="week" name="test-week" value=""></p>
+                    </div>
+                    <div class="col4">
+                        <p><strong>Example Time Field</strong><br/>
+                            <input type="time" name="test-time" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col6">
+                        <p><strong>Example Search Field</strong><br/>
+                            <input type="search" name="test-search" value=""></p>
+                    </div>
+                    <div class="col6">
+                        <p><strong>Example Tel Field</strong><br/>
+                            <input type="tel" name="test-tel" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col12">
+                        <p><strong>Example URL Field</strong><br/>
+                            <input type="url" name="test-url" value=""></p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col12">
+                        <p><strong>Example Textarea</strong><br/>
+                            <textarea name="test-textarea"></textarea></p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
-	<div class="block grey-light">
-		<div class="wrap">
+    <div class="block grey-light">
+        <div class="wrap">
 
-			<h2>Documentation</h2>			
-			<p>The code snippet below will get you where you need to go. Simply include jQuery, jquery.squirrel.min.js, and add a class of squirrel to your form.</p>
-			<script src="https://gist.github.com/jpederson/10656984.js"></script>
-			<p>For more information and advanced configuration options, head over to the <a href="https://github.com/jpederson/Squirrel.js/wiki">wiki</a> and look it up, or take the time while you're on Github to post an issue or request a feature!</p>
+            <h2>Documentation</h2>
 
-		</div>
-	</div>
-	
-	<a name="download"></a>
-	<div class="block grey">
-		<div class="wrap">
+            <p>The code snippet below will get you where you need to go. Simply include jQuery, jquery.squirrel.min.js, and add a class of squirrel to your form.</p>
+            <script src="https://gist.github.com/jpederson/10656984.js"></script>
+            <p>For more information and advanced configuration options, head over to the <a href="https://github.com/jpederson/Squirrel.js/wiki">wiki</a> and look it up, or take the time while you're on Github to post an issue or request a feature!</p>
 
-			<h2>Download Squirrel.js</h2>
-			<p>Visit the project on Github for updates or just download the source and dig in!</p>
-			<p class="buttons"><a href="https://github.com/jpederson/Squirrel.js/" target="_blank" class="btn">Squirrel.js on Github</a> <a href="https://github.com/jpederson/Squirrel.js/archive/gh-pages.zip" target="_blank" class="btn gold">Download Latest</a></p>
+        </div>
+    </div>
 
-			<div class="clear"></div>
+    <a name="download"></a>
 
-		</div>
-	</div>
+    <div class="block grey">
+        <div class="wrap">
 
-	<a name="author"></a>
-	<div class="block gold footer">
-		<div class="wrap">
-			<h2>About the Author</h2>
-			<div class="fifty">
-				<p>Built with care for <strong>free</strong> by me, <a href="http://jpederson.com" target="_blank">James Pederson</a>.</p>
-				<p>I'm a web developer and Credit Union advocate from Madison, WI. I'm also available for hire, <a href="http://jpederson.com/">get in touch</a> so we can discuss your project.</p>
-			</div>
-			<div class="fifty">
-				<p>Did my script help you? Buy me a beer to show me some love! Also, visit my site and email me to let me know your thoughts.</p>
-				<p>
-				<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-					<input type="hidden" name="cmd" value="_s-xclick">
-					<input type="hidden" name="hosted_button_id" value="BNAQJ6MC449RQ">
-					<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-					<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-					</form>
-				</p>
-			</div>
-			<div class="clear"></div>
-		</div>
-	</div>
+            <h2>Download Squirrel.js</h2>
+
+            <p>Visit the project on Github for updates or just download the source and dig in!</p>
+
+            <p class="buttons"><a href="https://github.com/jpederson/Squirrel.js/" target="_blank" class="btn">Squirrel.js on Github</a> <a href="https://github.com/jpederson/Squirrel.js/archive/gh-pages.zip" target="_blank" class="btn gold">Download
+                    Latest</a></p>
+
+            <div class="clear"></div>
+
+        </div>
+    </div>
+
+    <a name="author"></a>
+
+    <div class="block gold footer">
+        <div class="wrap">
+            <h2>About the Author</h2>
+
+            <div class="fifty">
+                <p>Built with care for <strong>free</strong> by me, <a href="http://jpederson.com" target="_blank">James Pederson</a>.</p>
+
+                <p>I'm a web developer and Credit Union advocate from Madison, WI. I'm also available for hire, <a href="http://jpederson.com/">get in touch</a> so we can discuss your project.</p>
+            </div>
+            <div class="fifty">
+                <p>Did my script help you? Buy me a beer to show me some love! Also, visit my site and email me to let me know your thoughts.</p>
+
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="BNAQJ6MC449RQ">
+                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+                </form>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
 
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<!--Scripts-->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="jquery.squirrel.min.js"></script>
 
 <script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-614793-10', 'squirreljs.com');
-ga('send', 'pageview');
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+    ga('create', 'UA-614793-10', 'squirreljs.com');
+    ga('send', 'pageview');
 </script>
+
+</body>
+</html>
