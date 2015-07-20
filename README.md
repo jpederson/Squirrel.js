@@ -8,6 +8,8 @@ To get started, simply include the plugin after your jQuery library is loaded, a
 $('.my-form').squirrel();
 ```
 
+Additionally, you may simply specify a `data-squirrel` attribute to your form with its value set to your desired `storage_key` value. This way, you can have several forms with the same input names, and they'll be stored separately in local/sessionStorage.
+
 #### [Demo](http://squirreljs.com)
 #### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
 
