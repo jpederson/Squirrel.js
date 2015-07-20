@@ -6,13 +6,13 @@
  * Version: 1.0.0
  */
 
-;(function( $, window, document, undefined ){
+;(function( $, window, document, undefined ) {
 
     // let's start our plugin logic
     $.extend( $.fn, {
 
     	// naming our jquery plugin function
-        squirrel: function( action, options ){
+        squirrel: function( action, options ) {
 
 			// check for JSON object
 			var has_json = ( typeof JSON === 'object' && typeof JSON.parse === 'function' );
@@ -62,7 +62,6 @@
 
 			},
 
-
 			// clear the sessionStorage key based on the options specified.
 			unstash = function() {
 
@@ -75,7 +74,6 @@
 
 			};
 
-
             // Iterate through all the matching elements and return
             // the jquery object to preserve chaining.
 	        return this.each(function(){
@@ -85,7 +83,7 @@
 
 	        		// clear the stash if clear is passed
 		        	if ( action === 'clear' ) {
-		        		
+
 		        		unstash();
 
 		        	} else {
@@ -93,7 +91,6 @@
 		                // Store a jQuery object for our element so we can use it
 		                // inside our other bindings.
 			            var elem = $(this);
-
 
 						// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 						// load text values from session storage
@@ -104,17 +101,15 @@
 							}
 						});
 
-
 						// set select values on load
 						elem.find('select[name]').each(function(){
 							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
-								$(this).find('option').each(function(){ 
-									this.selected = ( this.value === value ); 
+								$(this).find('option').each(function(){
+									this.selected = ( this.value === value );
 								});
 							}
 						});
-
 
 						// radio buttons
 						elem.find('input[type=radio][name]').each(function(){
@@ -124,7 +119,6 @@
 							}
 						});
 
-
 						// checkboxes
 						elem.find('input[type=checkbox][name]').each(function(){
     						var value = stash( $(this).attr( 'name' ) );
@@ -133,20 +127,17 @@
     						}
 						});
 
-
 						// UPDATE VALUES FOR ALL FIELDS ON CHANGE
 						// track changes in fields and store values as they're typed
 						elem.find('input, select, textarea').on( 'blur keyup change', function() {
     						stash( $(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
 						});
 
-
-						// when the clear button is clicked, clear the sessionStorage as well 
+						// when the clear button is clicked, clear the sessionStorage as well
 						// so it doesn't creepily load next refresh.
 						elem.find('input[type=clear]').click(function(){
 							unstash();
 						});
-
 
 						// clear storage on submit as well.
 						elem.submit(function(){
@@ -155,9 +146,8 @@
 							}
 						});
 
-
 					} // end default action
-	        		
+
 	        	} // if sessionStorage
 
 	        }); // return each plugin call
@@ -166,7 +156,6 @@
 
     }); // end jQuery extend
 
-
     // some default options for squirrel.js
     $.fn.squirrel.options = {
     	clear_on_submit: true,
@@ -174,12 +163,11 @@
     	storage_key: 'squirrel'
     };
 
-
 })( jQuery, window, document );
 
 
 // onload
-$(function(){
+$(function() {
 
 	$('form.squirrel').squirrel();
 
