@@ -3,7 +3,7 @@
  * http://github.com/jpederson/Squirrel.js
  * Author: James Pederson (jpederson.com)
  * Licensed under the MIT, GPL licenses.
- * Version: 1.0.0
+ * Version: 0.1.3
  */
 ; (function($, window, document, undefined) {
 
@@ -19,6 +19,9 @@
 
             // validate passed action, defaulting to init.
             action = (typeof(action) !== 'undefined' ? action : 'init');
+
+            // check for data-squirrel attribute
+            options.storage_key = ( this.attr('data-squirrel') ? this.data('squirrel') : options.storage_key );
 
             // stash or grab a value from our session store object.
             var stash = function(key, value) {
@@ -168,6 +171,6 @@
 // onload
 $(function() {
 
-    $('form.squirrel').squirrel();
+    $('form.squirrel, form[data-squirrel]').squirrel();
 
 });
