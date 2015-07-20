@@ -112,8 +112,10 @@
                         var elem = $(this),
                             value = stash(storage_key, elem.attr('name'));
                         if (value !== null) {
-                            elem.find('option').each(function() {
-                                this.selected = (this.value === value);
+                            // if value is not enumerable then make it enumerable. Then for each value in the array, find the option
+                            // with that value and set the property called selected to true
+                            $.each(typeof(value) !== 'object' ? [value] : value, function (index, option) {
+                                elem.find('option[value=' + option + ']').prop('selected', true);
                             });
                         }
                     });
