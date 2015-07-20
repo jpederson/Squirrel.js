@@ -100,7 +100,7 @@
                     // load text values from session storage
                     elem.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
                         var value = stash($(this).attr('name'));
-                        if (value !== null) {
+                        if (value !== null && !$(this).is('[readonly]') && $(this).is(':enabled')) {
                             $(this).val(value);
                         }
                     });
