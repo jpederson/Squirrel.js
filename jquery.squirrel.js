@@ -130,7 +130,12 @@
                     // checkboxes
                     form.find('input[type=checkbox][name]').each(function() {
                         var elem = $(this),
-                            value = stash(storage_key, elem.attr('name'));
+                            chkval = elem.attr('value');
+                        if ( typeof chkval !== 'string' ) {
+                            chkval = '';
+                        }
+
+                        var value = stash(storage_key, elem.attr('name')+chkval);
                         if (value !== null) {
                             this.checked = (value === true);
                         }
@@ -139,8 +144,9 @@
                     // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                     // track changes in fields and store values as they're typed
                     form.find('input[type!=file], select, textarea').on('blur keyup change', function() {
-                        var elem = $(this);
-                        stash(storage_key, elem.attr('name'), this.type === 'checkbox' ? elem.prop('checked') : elem.val());
+                        var elem = $(this),
+                            stashname = (this.type === 'checkbox' && elem.attr('value') !== undefined) ? elem.attr('name')+elem.attr('value') : elem.attr('name');
+                        stash(storage_key, stashname, this.type === 'checkbox' ? elem.prop('checked') : elem.val());
                     });
 
                     // when the reset button is clicked, clear the sessionStorage as well
