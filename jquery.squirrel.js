@@ -14,9 +14,6 @@
     	// naming our jquery plugin function
         squirrel: function( action, options ) {
 
-			// check for JSON object
-			var has_json = ( typeof JSON === 'object' && typeof JSON.parse === 'function' );
-
             // set our options from the defaults, overriding with the
             // parameter we pass into this function.
 			options = $.extend( $.fn.squirrel.options, options );
@@ -79,7 +76,7 @@
 	        return this.each(function(){
 
 	            // we're doin' nothing if we don't have sessionStorage or JSON support.
-				if ( ( window.sessionStorage || window.localStorage ) && has_json ) {
+				if ( window.sessionStorage || window.localStorage ) {
 
 	        		// clear the stash if clear is passed
 		        	if ( action === 'clear' ) {
