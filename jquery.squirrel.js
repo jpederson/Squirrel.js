@@ -102,8 +102,8 @@
                     form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
                         var elem = $(this),
                             value = stash(storage_key, elem.attr('name'));
-                        if (value !== null && !elem.is('[readonly]') && elem.is(':enabled')) {
-                            elem.val(value);
+                        if (value !== null && !elem.is('[readonly]') && elem.is(':enabled') && elem.val()!==value ) {
+                            elem.val(value).trigger('change');
                         }
                     });
 
@@ -115,7 +115,7 @@
                             // if value is not enumerable then make it enumerable. Then for each value in the array, find the option
                             // with that value and set the property called selected to true
                             $.each(typeof(value) !== 'object' ? [value] : value, function (index, option) {
-                                elem.find('option[value=' + option + ']').prop('selected', true);
+                                elem.find('option[value=' + option + ']:not(:checked)').prop('selected', true).trigger('change');
                             });
                         }
                     });
@@ -124,8 +124,9 @@
                     form.find('input[type=radio][name]').each(function() {
                         var elem = $(this),
                             value = stash(storage_key, elem.attr('name'));
-                        if (value !== null) {
+                        if (value !== null && value !== this.checked) {
                             this.checked = (elem.val() === value);
+                            elem.trigger('change');
                         }
                     });
 
@@ -138,8 +139,9 @@
                         }
 
                         var value = stash(storage_key, elem.attr('name')+chkval);
-                        if (value !== null) {
+                        if (value !== null && value !== this.checked) {
                             this.checked = (value === true);
+                            elem.trigger('change');
                         }
                     });
 
