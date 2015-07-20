@@ -85,10 +85,10 @@
 
                 // Store a jQuery object for the form so we can use it
                 // inside our other bindings.
-                var elem = $(this);
+                var form = $(this);
 
 	            // check for data-squirrel attribute
-	            var storage_key = elem.attr('data-squirrel') ? elem.data('squirrel') : options.storage_key;
+	            var storage_key = form.attr('data-squirrel') ? form.data('squirrel') : options.storage_key;
 
                 // clear the stash if clear is passed
                 if (action.toLowerCase() === 'clear') {
@@ -99,34 +99,38 @@
 
                     // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
                     // load text values from session storage
-                    elem.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
-                        var value = stash(storage_key, $(this).attr('name'));
-                        if (value !== null && !$(this).is('[readonly]') && $(this).is(':enabled')) {
-                            $(this).val(value);
+                    form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
+                        var elem = $(this),
+                            value = stash(storage_key, elem.attr('name'));
+                        if (value !== null && !elem.is('[readonly]') && elem.is(':enabled')) {
+                            elem.val(value);
                         }
                     });
 
                     // set select values on load
-                    elem.find('select[name]').each(function() {
-                        var value = stash(storage_key, $(this).attr('name'));
+                    form.find('select[name]').each(function() {
+                        var elem = $(this),
+                            value = stash(storage_key, elem.attr('name'));
                         if (value !== null) {
-                            $(this).find('option').each(function() {
+                            elem.find('option').each(function() {
                                 this.selected = (this.value === value);
                             });
                         }
                     });
 
                     // radio buttons
-                    elem.find('input[type=radio][name]').each(function() {
-                        var value = stash(storage_key, $(this).attr('name'));
+                    form.find('input[type=radio][name]').each(function() {
+                        var elem = $(this),
+                            value = stash(storage_key, elem.attr('name'));
                         if (value !== null) {
-                            this.checked = ($(this).val() === value);
+                            this.checked = (elem.val() === value);
                         }
                     });
 
                     // checkboxes
-                    elem.find('input[type=checkbox][name]').each(function() {
-                        var value = stash(storage_key, $(this).attr('name'));
+                    form.find('input[type=checkbox][name]').each(function() {
+                        var elem = $(this),
+                            value = stash(storage_key, elem.attr('name'));
                         if (value !== null) {
                             this.checked = (value === true);
                         }
@@ -134,18 +138,19 @@
 
                     // UPDATE VALUES FOR ALL FIELDS ON CHANGE
                     // track changes in fields and store values as they're typed
-                    elem.find('input[type!=file], select, textarea').on('blur keyup change', function() {
-                        stash(storage_key, $(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
+                    form.find('input[type!=file], select, textarea').on('blur keyup change', function() {
+                        var elem = $(this);
+                        stash(storage_key, elem.attr('name'), this.type === 'checkbox' ? elem.prop('checked') : elem.val());
                     });
 
                     // when the reset button is clicked, clear the sessionStorage as well
                     // so it doesn't creepily load on next refresh.
-                    elem.find('button[type=reset], input[type=reset]').click(function() {
+                    form.find('button[type=reset], input[type=reset]').click(function() {
                         unstash( storage_key );
                     });
 
                     // clear storage on submit as well.
-                    elem.submit(function() {
+                    form.submit(function() {
                         if (options.clear_on_submit) {
                             unstash( storage_key );
                         }
