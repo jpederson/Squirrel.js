@@ -22,12 +22,12 @@
 			options = $.extend( $.fn.squirrel.options, options );
 
 			// validate passed action, defaulting to init.
-			action = ( typeof( action ) !== "undefined" ? action : "init" );
+			action = ( typeof( action ) !== 'undefined' ? action : 'init' );
 
 			// stash or grab a value from our session store object.
 			var stash = function( key, value ) {
 
-				value = ( typeof( value ) !== "undefined" ? value : null );
+				value = ( typeof( value ) !== 'undefined' ? value : null );
 
 				// get the squirrel storage object
 				var store = JSON.parse( ( options.storage_method == 'local' ? localStorage.getItem( options.storage_key ) : sessionStorage.getItem( options.storage_key ) ) ),
@@ -58,7 +58,7 @@
 
 				// return the store value if the store isn't empty and the key exists.
 				// else return empty strings
-				return ( store !== null ? ( typeof( store[key] ) !== "undefined" ? store[key] : "" ) : "" );
+				return ( store !== null ? ( typeof( store[key] ) !== 'undefined' ? store[key] : '' ) : '' );
 
 			},
 
@@ -84,7 +84,7 @@
 				if ( ( window.sessionStorage || window.localStorage ) && has_json ) {
 
 	        		// clear the stash if clear is passed
-		        	if ( action == "clear" ) {
+		        	if ( action == 'clear' ) {
 		        		
 		        		unstash();
 
@@ -97,8 +97,8 @@
 
 						// LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
 						// load text values from session storage
-						elem.find("input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]").each(function(){
-							var value = stash( $(this).attr( "name" ) );
+						elem.find('input[type=text][name], textarea[name], input[type=email][name], input[type=number], input[type=date], input[type=datetime], input[type=datetime-local], input[type=color], input[type=range], input[type=month], input[type=week], input[type=time], input[type=search], input[type=tel], input[type=url]').each(function(){
+							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
 								$(this).val( value );
 							}
@@ -106,10 +106,10 @@
 
 
 						// set select values on load
-						elem.find("select[name]").each(function(){
-							var value = stash( $(this).attr( "name" ) );
+						elem.find('select[name]').each(function(){
+							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
-								$(this).find("option").each(function(){ 
+								$(this).find('option').each(function(){ 
 									this.selected = ( this.value == value ); 
 								});
 							}
@@ -117,8 +117,8 @@
 
 
 						// radio buttons
-						elem.find("input[type=radio][name]").each(function(){
-							var value = stash( $(this).attr( "name" ) );
+						elem.find('input[type=radio][name]').each(function(){
+							var value = stash( $(this).attr( 'name' ) );
 							if ( value !== null ) {
 								this.checked = ( $(this).val() == value );
 							}
@@ -126,8 +126,8 @@
 
 
 						// checkboxes
-						elem.find("input[type=checkbox][name]").each(function(){
-    						var value = stash( $(this).attr( "name" ) );
+						elem.find('input[type=checkbox][name]').each(function(){
+    						var value = stash( $(this).attr( 'name' ) );
     						if ( value !== null ) {
         						this.checked = ( value == true );
     						}
@@ -136,14 +136,14 @@
 
 						// UPDATE VALUES FOR ALL FIELDS ON CHANGE
 						// track changes in fields and store values as they're typed
-						elem.find("input, select, textarea").on( 'blur keyup change', function() {
-    						stash( $(this).attr("name"), this.type === "checkbox" ? $(this).prop('checked') : $(this).val());
+						elem.find('input, select, textarea').on( 'blur keyup change', function() {
+    						stash( $(this).attr('name'), this.type === 'checkbox' ? $(this).prop('checked') : $(this).val());
 						});
 
 
 						// when the clear button is clicked, clear the sessionStorage as well 
 						// so it doesn't creepily load next refresh.
-						elem.find("input[type=clear]").click(function(){
+						elem.find('input[type=clear]').click(function(){
 							unstash();
 						});
 
@@ -181,6 +181,6 @@
 // onload
 $(function(){
 
-	$("form.squirrel").squirrel();
+	$('form.squirrel').squirrel();
 
 });
