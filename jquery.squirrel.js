@@ -117,7 +117,7 @@
                                         var $option = $(this);
                                         return ($option.val() === option || $option.html() === option);
                                     }).prop('selected', true).trigger('change');
-                                });                                
+                                });
                             }
                         });
 
