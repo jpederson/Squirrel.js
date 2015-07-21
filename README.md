@@ -66,3 +66,13 @@ Browser support for both sessionStorage and JSON (required to parse/stringify da
 To contribute, you'll need [nodejs](http://nodejs.org/) and [Grunt](http://gruntjs.com/) installed. Fork and clone the repo, then visit the directory in the terminal and type `npm install`. After that you can simply run the `grunt` command to watch the files in the project. It'll automatically lint, test, compile, and minify the plugin files so you can just code.
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+
+*****
+
+### Credits
+
+These folks make this project possible, and are happy to help you integrate it into your site. Post an issue, and we're happy to help!
+
+- @jpederson ([website](http://jpederson.com))
+- @softwarespot ([website](http://softwarespot.wordpress.com/))
+
