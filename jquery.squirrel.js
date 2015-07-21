@@ -23,7 +23,7 @@
                 // stash or grab a value from our session store object.
                 var stash = function(storage_key, key, value) {
 
-                        value = typeof value !== 'undefined' ? value : null;
+                        value = typeof(value) !== 'undefined' ? value : null;
 
                         // get the squirrel storage object
                         var storage_method = options.storage_method.toLowerCase(),
@@ -135,7 +135,7 @@
                         $form.find('input[type=checkbox][name]').each(function() {
                             var $elem = $(this),
                                 chkval = $elem.attr('value');
-                            if (typeof chkval !== 'string') {
+                            if (typeof(chkval) !== 'string') {
                                 chkval = '';
                             }
 
