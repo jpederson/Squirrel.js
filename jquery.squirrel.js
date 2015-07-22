@@ -78,7 +78,7 @@
 
                         return;
 
-                    } // if sessionStorage
+                    } // if not storage
 
                     // Store a jQuery object for the form so we can use it
                     // inside our other bindings.
