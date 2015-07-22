@@ -7,10 +7,10 @@
  */
 ; (function($, window, document, undefined) {
 
-    // let's start our plugin logic
+    // let's start our plugin logic.
     $.extend($.fn, {
 
-        // naming our jquery plugin function
+        // naming our jQuery plugin function.
         squirrel: function(action, options) {
 
                 // set our options from the defaults, overriding with the
@@ -25,7 +25,7 @@
 
                         value = typeof(value) !== 'undefined' ? value : null;
 
-                        // get the squirrel storage object
+                        // get the squirrel storage object.
                         var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage,
                             store = JSON.parse(storage.getItem(storage_key)),
                             append = {};
@@ -37,13 +37,13 @@
 
                         }
 
-                        // if value a value is specified
+                        // if value a value is specified.
                         if (value !== null) {
 
                             // add the new value to the object we'll append to the store object.
                             append[key] = value;
 
-                            // extend the squirrel store object
+                            // extend the squirrel store object.
                             store = $.extend(store, append);
 
                             // session the squirrel store again.
@@ -51,7 +51,7 @@
 
                         }
 
-                        // return the store value if the store isn't empty and the key exists.
+                        // return the store value if the store isn't empty and the key exists,
                         // else return null
                         return (store !== null ? (typeof(store[key]) !== 'undefined' ? store[key] : null) : null);
 
@@ -60,7 +60,7 @@
                     // clear the sessionStorage key based on the options specified.
                     unstash = function(storage_key) {
 
-                        // clear value for our storage key
+                        // clear value for our storage key.
                         if (options.storage_method.toLowerCase() === 'local') {
                             localStorage.removeItem(storage_key);
                         } else {
@@ -70,10 +70,10 @@
                     };
 
                 // Iterate through all the matching elements and return
-                // the jquery object to preserve chaining.
+                // the jQuery object to preserve chaining.
                 return this.each(function() {
 
-                    // we're doin' nothing if we don't have a valid sessionStorage or localStorage object.
+                    // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
                     if (typeof(window.sessionStorage) === 'undefined' || typeof(window.localStorage) === 'undefined') {
 
                         return;
@@ -84,18 +84,18 @@
                     // inside our other bindings.
                     var $form = $(this);
 
-                    // check for data-squirrel attribute
+                    // check for data-squirrel attribute.
                     var storage_key = $form.attr('data-squirrel') ? $form.data('squirrel') : options.storage_key;
 
-                    // clear the stash if clear is passed
+                    // clear the stash if clear is passed.
                     if (action.toLowerCase() === 'clear') {
 
                         unstash(storage_key);
 
                     } else {
 
-                        // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE
-                        // load text values from session storage
+                        // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE.
+                        // load text values from session storage.
                         $form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
@@ -104,7 +104,7 @@
                             }
                         });
 
-                        // set select values on load
+                        // set select values on load.
                         $form.find('select[name]').each(function() {
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
@@ -118,7 +118,7 @@
                             }
                         });
 
-                        // radio buttons
+                        // radio buttons.
                         $form.find('input[type=radio][name]').each(function() {
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
@@ -128,7 +128,7 @@
                             }
                         });
 
-                        // checkboxes
+                        // checkboxes.
                         $form.find('input[type=checkbox][name]').each(function() {
                             var $elem = $(this),
                                 chkval = $elem.attr('value');
@@ -143,8 +143,8 @@
                             }
                         });
 
-                        // UPDATE VALUES FOR ALL FIELDS ON CHANGE
-                        // track changes in fields and store values as they're typed
+                        // UPDATE VALUES FOR ALL FIELDS ON CHANGE.
+                        // track changes in fields and store values as they're typed.
                         $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
                             var $elem = $(this),
                                 stashname = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
@@ -164,15 +164,15 @@
                             }
                         });
 
-                    } // end default action
+                    } // end default action.
 
-                }); // return each plugin call
+                }); // return each plugin call.
 
-            } // end plugin function
+            } // end plugin function.
 
     }); // end jQuery extend
 
-    // some default options for squirrel.js
+    // some default options for squirrel.js.
     $.fn.squirrel.options = {
         clear_on_submit: true,
         storage_method: 'session',
@@ -182,7 +182,7 @@
 })(jQuery, window, document);
 
 
-// onload
+// onload.
 $(function() {
 
     $('form.squirrel, form[data-squirrel]').squirrel();
