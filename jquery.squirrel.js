@@ -26,13 +26,15 @@
                         value = typeof(value) !== 'undefined' ? value : null;
 
                         // get the squirrel storage object
-                        var storage_method = options.storage_method.toLowerCase(),
-                            store = JSON.parse((storage_method === 'local' ? localStorage.getItem(storage_key) : sessionStorage.getItem(storage_key))),
+                        var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage,
+                            store = JSON.parse(storage.getItem(storage_key)),
                             append = {};
 
                         // if it doesn't exist, create an empty object.
                         if (store === null) {
+
                             store = {};
+
                         }
 
                         // if value a value is specified
@@ -45,11 +47,7 @@
                             store = $.extend(store, append);
 
                             // session the squirrel store again.
-                            if (storage_method === 'local') {
-                                localStorage.setItem(storage_key, JSON.stringify(store));
-                            } else {
-                                sessionStorage.setItem(storage_key, JSON.stringify(store));
-                            }
+                            storage.setItem(storage_key, JSON.stringify(store));
 
                         }
 
@@ -81,7 +79,6 @@
                         return;
 
                     } // if sessionStorage
-
 
                     // Store a jQuery object for the form so we can use it
                     // inside our other bindings.
