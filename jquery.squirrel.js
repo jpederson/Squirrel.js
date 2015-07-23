@@ -133,13 +133,13 @@
                         // checkboxes.
                         $form.find('input[type=checkbox][name]').each(function() {
                             var $elem = $(this),
-                                chkval = $elem.attr('value');
+                                checkedVal = $elem.attr('value');
 
-                            if (typeof(chkval) !== 'string') {
-                                chkval = '';
+                            if (typeof(checkedVal) !== 'string') {
+                                checkedVal = '';
                             }
 
-                            var value = stash(storage_key, $elem.attr('name') + chkval);
+                            var value = stash(storage_key, $elem.attr('name') + checkedVal);
 
                             if (value !== null && value !== this.checked) {
                                 this.checked = (value === true);
