@@ -145,8 +145,8 @@
                         // track changes in fields and store values as they're typed.
                         $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
                             var $elem = $(this),
-                                stashname = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
-                            stash(storage_key, stashname, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
+                                stashName = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
+                            stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
                         });
 
                         // when the reset button is clicked, clear the sessionStorage as well
