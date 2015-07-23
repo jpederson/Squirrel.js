@@ -23,6 +23,13 @@
                 // get the storage property.
                 var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
 
+                // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
+                if (typeof(storage) === 'undefined') {
+
+                    return;
+
+                } // if not storage
+
                 // stash or grab a value from our session store object.
                 var stash = function(storage_key, key, value) {
 
@@ -70,13 +77,6 @@
                 // Iterate through all the matching elements and return
                 // the jQuery object to preserve chaining.
                 return this.each(function() {
-
-                    // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
-                    if (typeof(storage) === 'undefined') {
-
-                        return;
-
-                    } // if not storage
 
                     // Store a jQuery object for the form so we can use it
                     // inside our other bindings.
