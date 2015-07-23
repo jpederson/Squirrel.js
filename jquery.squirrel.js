@@ -20,14 +20,16 @@
                 // validate passed action, defaulting to init.
                 action = (typeof(action) !== 'undefined' ? action : 'init');
 
+                // get the storage property.
+                var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
+
                 // stash or grab a value from our session store object.
                 var stash = function(storage_key, key, value) {
 
                         value = typeof(value) !== 'undefined' ? value : null;
 
                         // get the squirrel storage object.
-                        var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage,
-                            store = JSON.parse(storage.getItem(storage_key)),
+                        var store = JSON.parse(storage.getItem(storage_key)),
                             append = {};
 
                         // if it doesn't exist, create an empty object.
@@ -61,11 +63,7 @@
                     unstash = function(storage_key) {
 
                         // clear value for our storage key.
-                        if (options.storage_method.toLowerCase() === 'local') {
-                            localStorage.removeItem(storage_key);
-                        } else {
-                            sessionStorage.removeItem(storage_key);
-                        }
+                        storage.removeItem(storage_key);
 
                     };
 
@@ -74,7 +72,7 @@
                 return this.each(function() {
 
                     // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
-                    if (typeof(window.sessionStorage) === 'undefined' || typeof(window.localStorage) === 'undefined') {
+                    if (typeof(storage) === 'undefined') {
 
                         return;
 
