@@ -95,8 +95,10 @@
                         // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE.
                         // load text values from session storage.
                         $form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
+
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
+
                             if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
                                 $elem.val(value).trigger('change');
                             }
@@ -106,6 +108,7 @@
                         $form.find('select[name]').each(function() {
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
+
                             if (value !== null) {
                                 $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
                                     $elem.find('option').filter(function() {
@@ -120,6 +123,7 @@
                         $form.find('input[type=radio][name]').each(function() {
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
+
                             if (value !== null && value !== this.checked) {
                                 this.checked = ($elem.val() === value);
                                 $elem.trigger('change');
@@ -130,11 +134,13 @@
                         $form.find('input[type=checkbox][name]').each(function() {
                             var $elem = $(this),
                                 chkval = $elem.attr('value');
+
                             if (typeof(chkval) !== 'string') {
                                 chkval = '';
                             }
 
                             var value = stash(storage_key, $elem.attr('name') + chkval);
+
                             if (value !== null && value !== this.checked) {
                                 this.checked = (value === true);
                                 $elem.trigger('change');
@@ -146,6 +152,7 @@
                         $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
                             var $elem = $(this),
                                 stashName = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
+
                             stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
                         });
 
