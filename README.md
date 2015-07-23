@@ -57,7 +57,7 @@ Browser support for both sessionStorage and JSON (required to parse/stringify da
 
 ### Notes
 
-- Ignore a field by simply add a class of `squirrel-ignore` - the plugin won't save any values that are typed into that field.
+- Ignore a field by simply adding a class of `squirrel-ignore` - the plugin won't save any values that are typed into that field.
 
 *****
 
