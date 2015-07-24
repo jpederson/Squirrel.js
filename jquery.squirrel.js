@@ -74,11 +74,11 @@
 
                     };
 
-                // Iterate through all the matching elements and return
+                // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining.
                 return this.each(function() {
 
-                    // Store a jQuery object for the form so we can use it
+                    // store a jQuery object for the form so we can use it
                     // inside our other bindings.
                     var $form = $(this);
 
