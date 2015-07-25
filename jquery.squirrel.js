@@ -21,7 +21,7 @@
                 action = (typeof(action) !== 'undefined' ? action : 'init');
 
                 // get the storage property.
-                var storage = options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
+                var storage = typeof(options.storage_method) === 'string' && options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
 
                 // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
                 if (typeof(storage) === 'undefined') {
