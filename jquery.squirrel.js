@@ -102,10 +102,12 @@
                             if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
                                 $elem.val(value).trigger('change');
                             }
+
                         });
 
                         // set select values on load.
                         $form.find('select[name]').each(function() {
+
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
 
@@ -117,10 +119,12 @@
                                     }).prop('selected', true).trigger('change');
                                 });
                             }
+
                         });
 
                         // radio buttons.
                         $form.find('input[type=radio][name]').each(function() {
+
                             var $elem = $(this),
                                 value = stash(storage_key, $elem.attr('name'));
 
@@ -128,10 +132,12 @@
                                 this.checked = ($elem.val() === value);
                                 $elem.trigger('change');
                             }
+
                         });
 
                         // checkboxes.
                         $form.find('input[type=checkbox][name]').each(function() {
+
                             var $elem = $(this),
                                 checkedVal = $elem.attr('value');
 
@@ -145,28 +151,38 @@
                                 this.checked = (value === true);
                                 $elem.trigger('change');
                             }
+
                         });
 
                         // UPDATE VALUES FOR ALL FIELDS ON CHANGE.
                         // track changes in fields and store values as they're typed.
                         $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
+
                             var $elem = $(this),
                                 stashName = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
 
                             stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
+
                         });
 
                         // when the reset button is clicked, clear the sessionStorage as well
                         // so it doesn't creepily load on next refresh.
                         $form.find('button[type=reset], input[type=reset]').click(function() {
+
                             unstash(storage_key);
+
                         });
 
                         // clear storage on submit as well.
                         $form.submit(function() {
-                            if (options.clear_on_submit) {
+
+                            // if not boolean dataype or is true, then unstach the storage key.
+                            if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
+
                                 unstash(storage_key);
+
                             }
+
                         });
 
                     } // end default action.
