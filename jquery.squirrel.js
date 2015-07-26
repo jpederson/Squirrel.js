@@ -94,7 +94,7 @@
                     } else {
 
                         // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
-                        var $formFields = $form.find('*').filter('input[name], select[name], textarea[name]');
+                        var $formFields = $form.find('*').filter('input[id], input[name], select[name], select[id], textarea[id], textarea[name]');
                         $formFields.each(function() {
 
                             // cache the jQuery object.
@@ -105,6 +105,16 @@
 
                                 // declare a variable to hold the value from the storage.
                                 value = null;
+
+                            // if the name attribute doesn't exist, determine the id attribute instead.
+                            if (name === undefined) {
+                                name = $elem.attr('id');
+                            }
+
+                            // a name attribute is required to store the element data.
+                            if (name === undefined) {
+                                return;
+                            }
 
                             switch (this.tagName.toLowerCase()) {
                                 case 'input':
@@ -160,8 +170,8 @@
                                                 var $option = $(this);
                                                 return ($option.val() === option || $option.html() === option);
                                             }).prop('selected', true).trigger('change');
-                                        });
 
+                                        });
                                     }
                                     break;
                             }
@@ -177,6 +187,16 @@
 
                                 // get the name attribute.
                                 name = $elem.attr('name');
+
+                            // if the name attribute doesn't exist, determine the id attribute instead.
+                            if (name === undefined) {
+                                name = $elem.attr('id');
+                            }
+
+                            // a name attribute is required to store the element data.
+                            if (name === undefined) {
+                                return;
+                            }
 
                             // get the value attribute.
                             var value = $elem.attr('value'),
