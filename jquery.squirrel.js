@@ -17,9 +17,6 @@
                 // parameter we pass into this function.
                 options = $.extend($.fn.squirrel.options, options);
 
-                // validate passed action, defaulting to init.
-                action = (typeof(action) !== 'undefined' ? action : 'init');
-
                 // get the storage property.
                 var storage = typeof(options.storage_method) === 'string' && options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
 
@@ -72,7 +69,11 @@
                         // clear value for our storage key.
                         storage.removeItem(storage_key);
 
-                    };
+                    },
+
+                    // check if the action has been set to 'clear'.
+                    // defaults to false if any of the following conditions are false.
+                    isClear = typeof(action) === 'string' && action.toLowerCase() === 'clear';
 
                 // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining.
@@ -86,7 +87,7 @@
                     var storage_key = $form.attr('data-squirrel') ? $form.data('squirrel') : options.storage_key;
 
                     // clear the stash if clear is passed.
-                    if (action.toLowerCase() === 'clear') {
+                    if (isClear) {
 
                         unstash(storage_key);
 
