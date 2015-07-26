@@ -93,64 +93,77 @@
 
                     } else {
 
-                        // LOAD VALUES FOR ALL FORMS FROM SESSION STORAGE.
-                        // load text values from session storage.
-                        $form.find('input[type=color][name], input[type=date][name], input[type=datetime][name], input[type=datetime-local], input[type=email][name], input[type=month][name], input[type=number][name], input[type=range][name], input[type=search][name], input[type=tel][name], input[type=text][name], input[type=time][name], input[type=url][name], input[type=week][name], textarea[name]').each(function() {
+                        // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
+                        var $formFields = $form.find('*').filter('input[name], select[name], textarea[name]');
+                        $formFields.each(function() {
 
+                            // cache the jQuery object.
                             var $elem = $(this),
-                                value = stash(storage_key, $elem.attr('name'));
 
-                            if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
-                                $elem.val(value).trigger('change');
-                            }
+                                // get the name attribute.
+                                name = $elem.attr('name'),
 
-                        });
+                                // declare a variable to hold the value from the storage.
+                                value = null;
 
-                        // set select values on load.
-                        $form.find('select[name]').each(function() {
+                            switch (this.tagName.toLowerCase()) {
+                                case 'input':
+                                case 'textarea':
+                                    var type = $elem.attr('type');
 
-                            var $elem = $(this),
-                                value = stash(storage_key, $elem.attr('name'));
+                                    if (type === 'checkbox') {
 
-                            if (value !== null) {
-                                $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
-                                    $elem.find('option').filter(function() {
-                                        var $option = $(this);
-                                        return ($option.val() === option || $option.html() === option);
-                                    }).prop('selected', true).trigger('change');
-                                });
-                            }
+                                        // checkboxes.
+                                        var checkedValue = $elem.attr('value');
 
-                        });
+                                        if (typeof(checkedValue) !== 'string') {
+                                            checkedValue = '';
+                                        }
 
-                        // radio buttons.
-                        $form.find('input[type=radio][name]').each(function() {
+                                        value = stash(storage_key, name + checkedValue);
 
-                            var $elem = $(this),
-                                value = stash(storage_key, $elem.attr('name'));
+                                        if (value !== null && value !== this.checked) {
+                                            this.checked = (value === true);
+                                            $elem.trigger('change');
+                                        }
 
-                            if (value !== null && value !== this.checked) {
-                                this.checked = ($elem.val() === value);
-                                $elem.trigger('change');
-                            }
+                                    } else if (type === 'radio') {
 
-                        });
+                                        // radio buttons.
+                                        value = stash(storage_key, name);
 
-                        // checkboxes.
-                        $form.find('input[type=checkbox][name]').each(function() {
+                                        if (value !== null && value !== this.checked) {
+                                            this.checked = ($elem.val() === value);
+                                            $elem.trigger('change');
+                                        }
 
-                            var $elem = $(this),
-                                checkedVal = $elem.attr('value');
+                                    } else {
 
-                            if (typeof(checkedVal) !== 'string') {
-                                checkedVal = '';
-                            }
+                                        // load text values from session storage.
+                                        value = stash(storage_key, name);
 
-                            var value = stash(storage_key, $elem.attr('name') + checkedVal);
+                                        if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
+                                            $elem.val(value).trigger('change');
+                                        }
 
-                            if (value !== null && value !== this.checked) {
-                                this.checked = (value === true);
-                                $elem.trigger('change');
+                                    }
+                                    break;
+
+                                case 'select':
+                                    // set select values on load.
+                                    value = stash(storage_key, name);
+
+                                    if (value !== null) {
+
+                                        $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
+                                            $elem.find('option').filter(function() {
+                                                var $option = $(this);
+                                                return ($option.val() === option || $option.html() === option);
+                                            }).prop('selected', true).trigger('change');
+                                        });
+
+                                    }
+                                    break;
                             }
 
                         });
@@ -159,8 +172,17 @@
                         // track changes in fields and store values as they're typed.
                         $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function() {
 
+                            // cache the jQuery object.
                             var $elem = $(this),
-                                stashName = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
+
+                                // get the name attribute.
+                                name = $elem.attr('name');
+
+                            // get the value attribute.
+                            var value = $elem.attr('value'),
+
+                                // pre-append the name attribute with the value if a checkbox; otherwise use the name only.
+                                stashName = (this.type === 'checkbox' && value !== undefined) ? name + value : name;
 
                             stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
 
