@@ -167,14 +167,14 @@
 
                         // when the reset button is clicked, clear the sessionStorage as well
                         // so it doesn't creepily load on next refresh.
-                        $form.find('button[type=reset], input[type=reset]').click(function() {
+                        $form.find('button[type=reset], input[type=reset]').on('click', function() {
 
                             unstash(storage_key);
 
                         });
 
                         // clear storage on submit as well.
-                        $form.submit(function() {
+                        $form.on('submit', function() {
 
                             // if not boolean dataype or is true, then unstach the storage key.
                             if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
