@@ -157,7 +157,7 @@
 
                         // UPDATE VALUES FOR ALL FIELDS ON CHANGE.
                         // track changes in fields and store values as they're typed.
-                        $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur keyup change', function() {
+                        $form.find('input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)').on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function() {
 
                             var $elem = $(this),
                                 stashName = (this.type === 'checkbox' && $elem.attr('value') !== undefined) ? $elem.attr('name') + $elem.attr('value') : $elem.attr('name');
@@ -168,14 +168,14 @@
 
                         // when the reset button is clicked, clear the sessionStorage as well
                         // so it doesn't creepily load on next refresh.
-                        $form.find('button[type=reset], input[type=reset]').on('click', function() {
+                        $form.find('button[type=reset], input[type=reset]').on('click.squirrel.js', function() {
 
                             unstash(storage_key);
 
                         });
 
                         // clear storage on submit as well.
-                        $form.on('submit', function() {
+                        $form.on('submit.squirrel.js', function() {
 
                             // if not boolean dataype or is true, then unstach the storage key.
                             if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
