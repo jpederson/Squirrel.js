@@ -30,8 +30,6 @@
                 // stash or grab a value from our session store object.
                 var stash = function(storage_key, key, value) {
 
-                        value = typeof(value) !== 'undefined' ? value : null;
-
                         // get the squirrel storage object.
                         var store = JSON.parse(storage.getItem(storage_key)),
                             append = {};
@@ -44,7 +42,7 @@
                         }
 
                         // if value a value is specified.
-                        if (value !== null) {
+                        if (typeof(value) !== 'undefined' && value !== null) {
 
                             // add the new value to the object we'll append to the store object.
                             append[key] = value;
