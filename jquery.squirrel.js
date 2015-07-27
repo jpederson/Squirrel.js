@@ -59,7 +59,7 @@
 
                         // return the store value if the store isn't empty and the key exists,
                         // else return null
-                        return (store !== null ? (typeof(store[key]) !== 'undefined' ? store[key] : null) : null);
+                        return store !== null && typeof(store[key]) !== 'undefined' ? store[key] : null;
 
                     },
 
