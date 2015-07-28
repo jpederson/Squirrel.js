@@ -92,7 +92,7 @@
                     } else {
 
                         // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
-                        var $formFields = $form.find('*').filter('input[id], input[name], select[name], select[id], textarea[id], textarea[name]');
+                        var $formFields = $form.find('*').filter('input[id], input[name], select[id], select[name], textarea[id], textarea[name]');
                         $formFields.each(function() {
 
                             // cache the jQuery object.
