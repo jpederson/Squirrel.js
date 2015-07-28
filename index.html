@@ -20,116 +20,157 @@
     <div class="header">
         <div class="wrap">
             <h1>Squirrel.js</h1>
-
             <h3>Improve form usability with this tiny jQuery plugin that temporarily stores field values in HTML5 sessionStorage as users type.</h3>
         </div>
     </div>
 
     <div class="block grey-lighter">
         <div class="wrap">
-
             <h2>A Quick Example</h2>
-
-            <p>The example form below will store values in the form as you type or change them - so that if you refresh the page or navigate away and return, the things you entered will still be there. It clears when the user clears or submits the form,
-                otherwise it will last until the browser window is closed.</p>
+            <p>
+                The example form below will store values in the form as you type or change them - so that if you refresh the page or navigate away and return, the things you entered will still be there. It clears when the user clears or submits the form,
+                otherwise it will last until the browser window is closed.
+            </p>
 
             <form action="/" method="post" class="squirrel">
                 <div class="grid-row">
                     <div class="col4">
-                        <p><strong>Example Text Field</strong><br/>
-                            <input type="text" name="test-text" value=""></p>
+                        <p>
+                            <strong>Example Text Field</strong><br/>
+                            <input type="text" name="test-text" value="">
+                        </p>
                     </div>
                     <div class="col4">
                         <p><strong>Example Number Field</strong><br/>
                             <input type="number" name="test-number" value=""></p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Email Field</strong><br/>
-                            <input type="email" name="test-email" value=""></p>
+                        <p>
+                            <strong>Example Email Field</strong><br/>
+                            <input type="email" name="test-email" value="">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col4">
-                        <p><strong>Example Radio Buttons</strong><br/>
-                            <input type="radio" name="test-radio" value="yes"> Yes <input type="radio" name="test-radio" value="no"> No </p>
+                        <p>
+                            <strong>Example Radio Buttons</strong><br/>
+                            <input type="radio" name="test-radio" value="yes"> Yes <input type="radio" name="test-radio" value="no"> No
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Range Field</strong><br/>
-                            <input type="range" name="test-range" value=""></p>
+                        <p>
+                            <strong>Example Range Field</strong><br/>
+                            <input type="range" name="test-range" value="">
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Color Field</strong><br/>
-                            <input type="color" name="test-color" value="#000000"></p>
+                        <p>
+                            <strong>Example Color Field</strong><br/>
+                            <input type="color" name="test-color" value="#000000">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col4">
-                        <p><strong>Example Checkboxes</strong><br/>
-                            <input type="checkbox" name="test-checkbox" value="yes"> Option 1 <input type="checkbox" name="test-checkbox" value="no"> Option 2 </p>
+                        <p>
+                            <strong>Example Checkboxes</strong><br/>
+                            <input type="checkbox" name="test-checkbox" value="yes"> Option 1 <input type="checkbox" name="test-checkbox" value="no"> Option 2
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Select List</strong><br/>
+                        <p>
+                            <strong>Example Select List</strong><br/>
                             <select name="test-select">
                                 <option value="1">Option 1</option>
                                 <option value="2">Option 2</option>
                                 <option value="3">Option 3</option>
                                 <option value="4">Option 4</option>
-                            </select></p>
+                            </select>
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Select Multiple List</strong><br/>
+                        <p>
+                            <strong>Example Select Multiple List</strong><br/>
                             <select name="test-select-multiple" multiple>
                                 <option value="1">Option 1</option>
                                 <option value="2">Option 2</option>
                                 <option value="3">Option 3</option>
                                 <option value="4">Option 4</option>
-                            </select></p>
+                            </select>
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col6">
-                        <p><strong>Example Date Field</strong><br/>
-                            <input type="date" name="test-date" value=""></p>
+                        <p>
+                            <strong>Example Date Field</strong><br/>
+                            <input type="date" name="test-date" value="">
+                        </p>
                     </div>
                     <div class="col6">
-                        <p><strong>Example Datetime (Local) Field</strong><br/>
-                            <input type="datetime-local" name="test-datetime-local" value=""></p>
+                        <p>
+                            <strong>Example Datetime (Local) Field</strong><br/>
+                            <input type="datetime-local" name="test-datetime-local" value="">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col4">
-                        <p><strong>Example Month Field</strong><br/>
-                            <input type="month" name="test-month" value=""></p>
+                        <p>
+                            <strong>Example Month Field</strong><br/>
+                            <input type="month" name="test-month" value="">
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Week Field</strong><br/>
-                            <input type="week" name="test-week" value=""></p>
+                        <p>
+                            <strong>Example Week Field</strong><br/>
+                            <input type="week" name="test-week" value="">
+                        </p>
                     </div>
                     <div class="col4">
-                        <p><strong>Example Time Field</strong><br/>
-                            <input type="time" name="test-time" value=""></p>
+                        <p>
+                            <strong>Example Time Field</strong><br/>
+                            <input type="time" name="test-time" value="">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col6">
-                        <p><strong>Example Search Field</strong><br/>
-                            <input type="search" name="test-search" value=""></p>
+                        <p>
+                            <strong>Example Search Field</strong><br/>
+                            <input type="search" name="test-search" value="">
+                        </p>
                     </div>
                     <div class="col6">
-                        <p><strong>Example Tel Field</strong><br/>
-                            <input type="tel" name="test-tel" value=""></p>
+                        <p>
+                            <strong>Example Tel Field</strong><br/>
+                            <input type="tel" name="test-tel" value="">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col12">
-                        <p><strong>Example URL Field</strong><br/>
-                            <input type="url" name="test-url" value=""></p>
+                        <p>
+                            <strong>Example URL Field</strong><br/>
+                            <input type="url" name="test-url" value="">
+                        </p>
                     </div>
                 </div>
                 <div class="grid-row">
                     <div class="col12">
-                        <p><strong>Example Textarea</strong><br/>
-                            <textarea name="test-textarea"></textarea></p>
+                        <p>
+                            <strong>Example Textarea</strong><br/>
+                            <textarea name="test-textarea"></textarea>
+                        </p>
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="col6">
+                        <button type="reset">Reset Button</button>
+                    </div>
+                    <div class="col6">
+                        <button type="button" id="start-stop">Stop Squirrel.js</button>
                     </div>
                 </div>
             </form>
@@ -195,6 +236,36 @@
 <!--Scripts-->
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <script src="jquery.squirrel.min.js"></script>
+
+<script>
+    $(function () {
+
+        // when the start/stop button is selected, start/stop squirrel on the form.
+        $('#start-stop').on('click', function () {
+            // cache the jQuery button object.
+            var $this = $(this);
+
+            // cache the form.
+            var $form = $('.squirrel');
+
+            // if stop is in the button text, then stop monitoring.
+            if ($this.text().search('Stop') !== -1) {
+                // pass the 'stop' action to squirrel and then the 'clear' action.
+                $form.squirrel('stop').squirrel('clear');
+
+                // set the text of the button.
+                $this.text('Start Squirrel.js');
+            } else {
+                // start monitoring again.
+                $form.squirrel();
+
+                // set the text of the button.
+                $this.text('Stop Squirrel.js');
+            }
+
+        });
+    });
+</script>
 
 <script>
     (function (i, s, o, g, r, a, m) {
