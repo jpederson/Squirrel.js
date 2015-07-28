@@ -114,9 +114,10 @@
                                 return;
                             }
 
-                            switch (this.tagName.toLowerCase()) {
-                                case 'input':
-                                case 'textarea':
+                            // tagName returns an uppercase value.
+                            switch (this.tagName) {
+                                case 'INPUT':
+                                case 'TEXTAREA':
                                     var type = $elem.attr('type');
 
                                     if (type === 'checkbox') {
@@ -157,7 +158,7 @@
                                     }
                                     break;
 
-                                case 'select':
+                                case 'SELECT':
                                     // set select values on load.
                                     value = stash(storage_key, name);
 
