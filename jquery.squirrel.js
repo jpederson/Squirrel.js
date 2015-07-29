@@ -23,7 +23,8 @@
                 // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
                 if (typeof(storage) === 'undefined') {
 
-                    return;
+                    // to maintain chaining in jQuery.
+                    return $(this);
 
                 }
 
