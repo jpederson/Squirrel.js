@@ -25,7 +25,7 @@
 
                     return;
 
-                } // if not storage
+                }
 
                 // stash or grab a value from our session store object.
                 var stash = function(storage_key, key, value) {
@@ -40,29 +40,30 @@
 
                         }
 
-                        // if value a value is specified.
-                        if (typeof(value) !== 'undefined' && value !== null) {
+                        // if a value isn't specified.
+                        if (typeof(value) === 'undefined' || value === null) {
 
-                            // create an append object literal.
-                            var append = {};
+                            // return the store value if the store value exists; otherwise, null.
+                            return typeof(store[key]) !== 'undefined' ? store[key] : null;
 
-                            // add the new value to the object we'll append to the store object.
-                            append[key] = value;
-
-                            // extend the squirrel store object.
-                            // in ES6 this can be shortened to $.extend(store, {[key]: value}).
-                            $.extend(store, append);
-
-                            // session the squirrel store again.
-                            storage.setItem(storage_key, JSON.stringify(store));
-
-                            // simply return the value.
-                            return value;
                         }
 
-                        // return the store value if the store isn't empty and the key exists,
-                        // else return null
-                        return typeof(store[key]) !== 'undefined' ? store[key] : null;
+                        // if a value is specified.
+                        // create an append object literal.
+                        var append = {};
+
+                        // add the new value to the object that we'll append to the store object.
+                        append[key] = value;
+
+                        // extend the squirrel store object.
+                        // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
+                        $.extend(store, append);
+
+                        // re-session the squirrel store again.
+                        storage.setItem(storage_key, JSON.stringify(store));
+
+                        // return the value.
+                        return value;
 
                     },
 
@@ -83,24 +84,25 @@
                     findFields = 'input[id], input[name], select[id], select[name], textarea[id], textarea[name]';
 
                 // iterate through all the matching elements and return
-                // the jQuery object to preserve chaining.
+                // the jQuery object to preserve chaining in jQuery.
                 return this.each(function() {
 
                     // store a jQuery object for the form so we can use it
-                    // inside our other bindings.
+                    // inside the other bindings.
                     var $form = $(this);
 
-                    // check for data-squirrel attribute.
-                    var storage_key = $form.attr('data-squirrel') ? $form.data('squirrel') : options.storage_key;
+                    // check for the data-squirrel attribute.
+                    var dataAttribute = $form.attr('data-squirrel'),
+                        storage_key = dataAttribute ? dataAttribute : options.storage_key;
 
                     switch (action) {
                         case 'CLEAR':
-                            // clear the stash if 'clear' is passed.
+                            // clear the storage if a 'clear' action is passed.
                             unstash(storage_key);
                             break;
 
                         case 'STOP':
-                            // stop the registered events if 'stop' is passed.
+                            // stop the registered events if a 'stop' action is passed.
                             $form.find(eventFields).off('blur.squirrel.js keyup.squirrel.js change.squirrel.js');
                             $form.find(eventReset).off('click.squirrel.js');
                             $form.off('submit.squirrel.js');
@@ -129,7 +131,7 @@
                                     }
                                 }
 
-                                // tagName returns an uppercase value.
+                                // tagName returns an uppercase value in HTML5.
                                 switch (this.tagName) {
                                     case 'INPUT':
                                     case 'TEXTAREA':
@@ -163,7 +165,7 @@
 
                                         } else {
 
-                                            // load text values from session storage.
+                                            // load the text values from the storage.
                                             value = stash(storage_key, name);
 
                                             if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
@@ -174,7 +176,7 @@
                                         break;
 
                                     case 'SELECT':
-                                        // set select values on load.
+                                        // set the select values on load.
                                         value = stash(storage_key, name);
 
                                         if (value !== null) {
@@ -182,8 +184,10 @@
                                             $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
 
                                                 $elem.find('option').filter(function() {
+
                                                     var $option = $(this);
                                                     return ($option.val() === option || $option.html() === option);
+
                                                 }).prop('selected', true).trigger('change');
 
                                             });
@@ -216,25 +220,24 @@
                                 // get the value attribute.
                                 var value = $elem.attr('value'),
 
-                                    // pre-append the name attribute with the value if a checkbox; otherwise use the name only.
+                                    // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
                                     stashName = (this.type === 'checkbox' && value !== undefined) ? name + value : name;
 
                                 stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
 
                             });
 
-                            // when the reset button is clicked, clear the sessionStorage as well
-                            // so it doesn't creepily load on next refresh.
+                            // when the reset button is clicked, clear the storage.
                             $form.find(eventReset).on('click.squirrel.js', function() {
 
                                 unstash(storage_key);
 
                             });
 
-                            // clear storage on submit as well.
+                            // clear the storage on submit.
                             $form.on('submit.squirrel.js', function() {
 
-                                // if not boolean dataype or is true, then unstach the storage key.
+                                // if not a boolean datatype or is equal to true, then clear the storage.
                                 if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
 
                                     unstash(storage_key);
@@ -250,9 +253,9 @@
 
             } // end plugin function.
 
-    }); // end jQuery extend
+    }); // end jQuery extend.
 
-    // some default options for squirrel.js.
+    // default options for squirrel.js.
     $.fn.squirrel.options = {
         clear_on_submit: true,
         storage_method: 'session',
@@ -265,6 +268,7 @@
 // onload.
 $(function() {
 
+    // load all forms that have the squirrel class  or data-squirrel attribute associated with them.
     $('form.squirrel, form[data-squirrel]').squirrel();
 
 });
