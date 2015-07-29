@@ -250,8 +250,8 @@
 
             // if stop is in the button text, then stop monitoring.
             if ($this.text().search('Stop') !== -1) {
-                // pass the 'stop' action to squirrel and then the 'clear' action.
-                $form.squirrel('stop').squirrel('clear');
+                // pass the 'stop' action to squirrel.
+                $form.squirrel('stop');
 
                 // set the text of the button.
                 $this.text('Start Squirrel.js');
