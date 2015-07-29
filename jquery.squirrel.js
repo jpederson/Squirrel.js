@@ -105,8 +105,7 @@
 
                         default:
                             // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
-                            var $formFields = $form.find('*').filter(findFields);
-                            $formFields.each(function() {
+                            $form.find('*').filter(findFields).each(function() {
 
                                 // cache the jQuery object.
                                 var $elem = $(this),
