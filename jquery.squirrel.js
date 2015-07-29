@@ -31,8 +31,7 @@
                 var stash = function(storage_key, key, value) {
 
                         // get the squirrel storage object.
-                        var store = JSON.parse(storage.getItem(storage_key)),
-                            append = {};
+                        var store = JSON.parse(storage.getItem(storage_key));
 
                         // if it doesn't exist, create an empty object.
                         if (store === null) {
@@ -44,11 +43,14 @@
                         // if value a value is specified.
                         if (typeof(value) !== 'undefined' && value !== null) {
 
+                            // create an append object literal.
+                            var append = {};
+
                             // add the new value to the object we'll append to the store object.
                             append[key] = value;
 
                             // extend the squirrel store object.
-                            store = $.extend(store, append);
+                            $.extend(store, append);
 
                             // session the squirrel store again.
                             storage.setItem(storage_key, JSON.stringify(store));
@@ -57,7 +59,7 @@
 
                         // return the store value if the store isn't empty and the key exists,
                         // else return null
-                        return store !== null && typeof(store[key]) !== 'undefined' ? store[key] : null;
+                        return typeof(store[key]) !== 'undefined' ? store[key] : null;
 
                     },
 
