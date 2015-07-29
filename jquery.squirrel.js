@@ -18,7 +18,7 @@
                 options = $.extend({}, $.fn.squirrel.options, options);
 
                 // get the storage property.
-                var storage = typeof(options.storage_method) === 'string' && options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
+                var storage = typeof(options.storage_method) === 'string' && options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
                 // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
                 if (typeof(storage) === 'undefined') {
@@ -71,8 +71,8 @@
 
                     };
 
-                // check the action is valid and convert to lowercase.
-                action = typeof(action) === 'string' && /^(?:clear|stop)$/i.test(action) ? action.toLowerCase() : 'start';
+                // check the action is valid and convert to uppercase.
+                action = typeof(action) === 'string' && /^(?:CLEAR|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
 
                 // strings related to the find functions and event handling.
                 var eventFields = 'input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)',
@@ -91,12 +91,12 @@
                     var storage_key = $form.attr('data-squirrel') ? $form.data('squirrel') : options.storage_key;
 
                     switch (action) {
-                        case 'clear':
+                        case 'CLEAR':
                             // clear the stash if 'clear' is passed.
                             unstash(storage_key);
                             break;
 
-                        case 'stop':
+                        case 'STOP':
                             // stop the registered events if 'stop' is passed.
                             $form.find(eventFields).off('blur.squirrel.js keyup.squirrel.js change.squirrel.js');
                             $form.find(eventReset).off('click.squirrel.js');
