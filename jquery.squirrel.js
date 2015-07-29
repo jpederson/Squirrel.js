@@ -50,11 +50,14 @@
                             append[key] = value;
 
                             // extend the squirrel store object.
+                            // in ES6 this can be shortened to $.extend(store, {[key]: value}).
                             $.extend(store, append);
 
                             // session the squirrel store again.
                             storage.setItem(storage_key, JSON.stringify(store));
 
+                            // simply return the value.
+                            return value;
                         }
 
                         // return the store value if the store isn't empty and the key exists,
