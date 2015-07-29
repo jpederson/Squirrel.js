@@ -15,7 +15,7 @@
 
                 // set our options from the defaults, overriding with the
                 // parameter we pass into this function.
-                options = $.extend($.fn.squirrel.options, options);
+                options = $.extend({}, $.fn.squirrel.options, options);
 
                 // get the storage property.
                 var storage = typeof(options.storage_method) === 'string' && options.storage_method.toLowerCase() === 'local' ? window.localStorage : window.sessionStorage;
