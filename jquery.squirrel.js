@@ -120,11 +120,11 @@
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (name === undefined) {
                                     name = $elem.attr('id');
-                                }
 
-                                // a name attribute is required to store the element data.
-                                if (name === undefined) {
-                                    return;
+                                    // a name attribute is required to store the element data.
+                                    if (name === undefined) {
+                                        return;
+                                    }
                                 }
 
                                 // tagName returns an uppercase value.
@@ -204,11 +204,11 @@
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (name === undefined) {
                                     name = $elem.attr('id');
-                                }
 
-                                // a name attribute is required to store the element data.
-                                if (name === undefined) {
-                                    return;
+                                    // a name attribute is required to store the element data.
+                                    if (name === undefined) {
+                                        return;
+                                    }
                                 }
 
                                 // get the value attribute.
