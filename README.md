@@ -58,7 +58,7 @@ Browser support for both sessionStorage and JSON (required to parse/stringify da
 ### Notes
 
 - Ignore a field by simply adding a class of `squirrel-ignore` - the plugin won't save any values that are typed into that field.
-- The events used in the plugin are click, submit, blur, keyup and change. They each have a namespace of .squirrel.js e.g. keyup.squirrel.js.
+- The events used in the plugin are click, submit, blur, keyup and change. They each have a namespace of .squirrel.js e.g. keyup.squirrel.js. Therefore you can easily turn off a particular event by call .off() and the event for a specific form selector.
 
 *****
 
