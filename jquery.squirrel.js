@@ -28,54 +28,6 @@
 
                 }
 
-                // stash or grab a value from our session store object.
-                var stash = function(storage_key, key, value) {
-
-                        // get the squirrel storage object.
-                        var store = JSON.parse(storage.getItem(storage_key));
-
-                        // if it doesn't exist, create an empty object.
-                        if (store === null) {
-
-                            store = {};
-
-                        }
-
-                        // if a value isn't specified.
-                        if (typeof(value) === 'undefined' || value === null) {
-
-                            // return the store value if the store value exists; otherwise, null.
-                            return typeof(store[key]) !== 'undefined' ? store[key] : null;
-
-                        }
-
-                        // if a value is specified.
-                        // create an append object literal.
-                        var append = {};
-
-                        // add the new value to the object that we'll append to the store object.
-                        append[key] = value;
-
-                        // extend the squirrel store object.
-                        // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
-                        $.extend(store, append);
-
-                        // re-session the squirrel store again.
-                        storage.setItem(storage_key, JSON.stringify(store));
-
-                        // return the value.
-                        return value;
-
-                    },
-
-                    // clear the sessionStorage key based on the options specified.
-                    unstash = function(storage_key) {
-
-                        // clear value for our storage key.
-                        storage.removeItem(storage_key);
-
-                    };
-
                 // check the action is valid and convert to uppercase.
                 action = typeof(action) === 'string' && /^(?:CLEAR|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
 
@@ -99,7 +51,7 @@
                     switch (action) {
                         case 'CLEAR':
                             // clear the storage if a 'clear' action is passed.
-                            unstash(storage_key);
+                            unstash(storage, storage_key);
                             break;
 
                         case 'STOP':
@@ -147,7 +99,7 @@
                                                 checkedValue = '';
                                             }
 
-                                            value = stash(storage_key, name + checkedValue);
+                                            value = stash(storage, storage_key, name + checkedValue);
 
                                             if (value !== null && value !== this.checked) {
                                                 this.checked = (value === true);
@@ -157,7 +109,7 @@
                                         } else if (type === 'radio') {
 
                                             // radio buttons.
-                                            value = stash(storage_key, name);
+                                            value = stash(storage, storage_key, name);
 
                                             if (value !== null && value !== this.checked) {
                                                 this.checked = ($elem.val() === value);
@@ -167,7 +119,7 @@
                                         } else {
 
                                             // load the text values from the storage.
-                                            value = stash(storage_key, name);
+                                            value = stash(storage, storage_key, name);
 
                                             if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
                                                 $elem.val(value).trigger('change');
@@ -178,7 +130,7 @@
 
                                     case 'SELECT':
                                         // set the select values on load.
-                                        value = stash(storage_key, name);
+                                        value = stash(storage, storage_key, name);
 
                                         if (value !== null) {
 
@@ -224,14 +176,14 @@
                                     // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
                                     stashName = (this.type === 'checkbox' && value !== undefined) ? name + value : name;
 
-                                stash(storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
+                                stash(storage, storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
 
                             });
 
                             // when the reset button is clicked, clear the storage.
                             $form.find(eventReset).on('click.squirrel.js', function() {
 
-                                unstash(storage_key);
+                                unstash(storage, storage_key);
 
                             });
 
@@ -241,7 +193,7 @@
                                 // if not a boolean datatype or is equal to true, then clear the storage.
                                 if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
 
-                                    unstash(storage_key);
+                                    unstash(storage, storage_key);
 
                                 }
 
@@ -255,6 +207,53 @@
             } // end plugin function.
 
     }); // end jQuery extend.
+
+    // stash or grab a value from our session store object.
+    var stash = function(storage, storage_key, key, value) {
+
+            // get the squirrel storage object.
+            var store = JSON.parse(storage.getItem(storage_key));
+
+            // if it doesn't exist, create an empty object.
+            if (store === null) {
+
+                store = {};
+
+            }
+
+            // if a value isn't specified.
+            if (typeof(value) === 'undefined' || value === null) {
+
+                // return the store value if the store value exists; otherwise, null.
+                return typeof(store[key]) !== 'undefined' ? store[key] : null;
+
+            }
+
+            // if a value is specified.
+            // create an append object literal.
+            var append = {};
+
+            // add the new value to the object that we'll append to the store object.
+            append[key] = value;
+
+            // extend the squirrel store object.
+            // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
+            $.extend(store, append);
+
+            // re-session the squirrel store again.
+            storage.setItem(storage_key, JSON.stringify(store));
+
+            // return the value.
+            return value;
+
+        },
+        // clear the sessionStorage key based on the options specified.
+        unstash = function(storage, storage_key) {
+
+            // clear value for our storage key.
+            storage.removeItem(storage_key);
+
+        };
 
     // default options for squirrel.js.
     $.fn.squirrel.options = {
