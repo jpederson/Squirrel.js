@@ -255,6 +255,7 @@
 
         };
 
+    // DEFAULTS
     // default options for squirrel.js.
     $.fn.squirrel.options = {
         clear_on_submit: true,
@@ -263,7 +264,6 @@
     };
 
 })(jQuery, window, document);
-
 
 // onload.
 $(function() {
