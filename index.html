@@ -241,7 +241,9 @@
     $(function () {
 
         // when the start/stop button is selected, start/stop squirrel on the form.
-        $('#start-stop').on('click', function () {
+        // this is using a namespace to distinguish between a standard click event.
+        // of course 'click' can be used on its own.
+        $('#start-stop').on('click.squirreljs.example', function () {
             // cache the jQuery button object.
             var $this = $(this);
 
@@ -250,20 +252,25 @@
 
             // if stop is in the button text, then stop monitoring.
             if ($this.text().search('Stop') !== -1) {
+
                 // pass the 'stop' action to squirrel.
                 $form.squirrel('stop');
 
                 // set the text of the button.
                 $this.text('Start Squirrel.js');
+
             } else {
+
                 // start monitoring again.
                 $form.squirrel();
 
                 // set the text of the button.
                 $this.text('Stop Squirrel.js');
+
             }
 
         });
+
     });
 </script>
 
