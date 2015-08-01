@@ -166,11 +166,14 @@
                     </div>
                 </div>
                 <div class="grid-row">
-                    <div class="col3">
+                    <div class="col4">
                         <button type="reset">Reset Button</button>
                     </div>
-                    <div class="col3">
+                    <div class="col4">
                         <button type="button" id="start-stop">Stop Squirrel.js</button>
+                    </div>
+                    <div class="col4">
+                        <button type="submit">Submit</button>
                     </div>
                 </div>
             </form>
@@ -268,6 +271,23 @@
                 $this.text('Stop Squirrel.js');
 
             }
+
+        });
+
+        // when the form is submitted.
+        $('form').on('submit.squirrel.example', function (event) {
+
+            // prevent default submission of the form.
+            event.preventDefault();
+
+            // cache the form jQuery object.
+            var $this = $(this);
+
+            // display an alert. This would normally be a submission e.g. ajax.
+            alert('Form submitted. The form will now be reset and the session data cleared.');
+
+            // reset the form, by triggering a reset event.
+            $this.trigger('reset');
 
         });
 
