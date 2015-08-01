@@ -8,7 +8,7 @@
 ; (function($, window, document, undefined) {
 
     // let's start our plugin logic.
-    $.extend($.fn, {
+    $.fn.extend({
 
         // naming our jQuery plugin function.
         squirrel: function(action, options) {
