@@ -24,7 +24,7 @@
                 if (typeof(storage) === 'undefined') {
 
                     // to maintain chaining in jQuery.
-                    return $(this);
+                    return this;
 
                 }
 
