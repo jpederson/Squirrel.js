@@ -29,7 +29,7 @@
                 }
 
                 // check the action is valid and convert to uppercase.
-                action = typeof(action) === 'string' && /^(?:CLEAR|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
+                action = typeof(action) === 'string' && /^(?:CLEAR|REMOVE|OFF|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
 
                 // strings related to the find functions and event handling.
                 var eventFields = 'input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)',
@@ -50,10 +50,12 @@
 
                     switch (action) {
                         case 'CLEAR':
+                        case 'REMOVE':
                             // clear the storage if a 'clear' action is passed.
                             unstash(storage, storage_key);
                             break;
 
+                        case 'OFF':
                         case 'STOP':
                             // stop the registered events if a 'stop' action is passed.
                             $form.find(eventFields).off('blur.squirrel.js keyup.squirrel.js change.squirrel.js');
