@@ -48,6 +48,10 @@
                     eventReset = 'button[type=reset], input[type=reset]',
                     findFields = 'input[id], input[name], select[id], select[name], textarea[id], textarea[name]';
 
+                // sanitize the options strings.
+                options.storage_key = sanitize(options.storage_key, 'squirrel');
+                options.storage_key_prefix = sanitize(options.storage_key_prefix, '');
+
                 // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining in jQuery.
                 return this.each(function() {
@@ -58,7 +62,7 @@
 
                     // check for the data-squirrel attribute.
                     var dataAttribute = $form.attr('data-squirrel'),
-                        storage_key = dataAttribute ? dataAttribute : options.storage_key;
+                        storage_key = options.storage_key_prefix + (dataAttribute ? dataAttribute: options.storage_key);
 
                     switch (action) {
                         case 'CLEAR':
@@ -267,6 +271,13 @@
             // clear value for our storage key.
             storage.removeItem(storage_key);
 
+        },
+        // sanitize a particular string option.
+        sanitize = function(key, defaultKey) {
+
+            // if a string type and is not whitespace, then return the key; otherwise the default key.
+            return typeof(key) === 'string' && key.trim().length > 0 ? key : defaultKey;
+
         };
 
     // DEFAULTS
@@ -274,7 +285,8 @@
     $.fn.squirrel.options = {
         clear_on_submit: true,
         storage_method: 'session',
-        storage_key: 'squirrel'
+        storage_key: 'squirrel',
+        storage_key_prefix: ''
     };
 
 })(jQuery, window, document);
