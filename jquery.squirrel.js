@@ -17,11 +17,23 @@
                 // parameter we pass into this function.
                 options = $.extend({}, $.fn.squirrel.options, options);
 
-                // get the storage property.
-                var storage = typeof(options.storage_method) === 'string' && options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
+                // initialize as null by default.
+                var storage = null;
 
-                // we're doing nothing if we don't have a valid sessionStorage or localStorage object.
-                if (typeof(storage) === 'undefined') {
+                // either 'local' or 'session' has been passed if this is true.
+                if (typeof(options.storage_method) === 'string') {
+
+                    storage = options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
+
+                // an object that could be a valid storage object has been passed.
+                } else if (options.storage_method !== null && typeof(options.storage_method) === 'object' ) {
+
+                    storage = options.storage_method;
+
+                }
+
+                // if null or the storage object does not contain the valid functions required, then return this.
+                if (storage === null || !(typeof(storage) === 'object' && 'getItem' in storage && 'removeItem' in storage && 'setItem' in storage)) {
 
                     // to maintain chaining in jQuery.
                     return this;
