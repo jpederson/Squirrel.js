@@ -54,7 +54,19 @@ module.exports = function(grunt) {
         },
 
         jshint: {
-            all: ['jquery.squirrel.js']
+            all: ['jquery.squirrel.js'],
+            options: {
+                curly: true,
+                eqeqeq: true,
+                eqnull: true,
+                notypeof: true,
+                undef: true,
+                browser: true,
+                globals: {
+                  jQuery: true,
+                  '$': true
+                }
+            }
         }
 
     });
