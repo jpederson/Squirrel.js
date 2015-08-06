@@ -7,7 +7,8 @@
  */
 ; (function($, window, document, undefined) {
 
-    // let's start our plugin logic.
+    // PLUGIN LOGIC
+
     $.fn.extend({
 
         // naming our jQuery plugin function.
@@ -25,8 +26,8 @@
 
                     storage = options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
-                // an object that could be a valid storage object has been passed.
-                } else if (options.storage_method !== null && typeof(options.storage_method) === 'object' ) {
+                    // an object that could be a valid storage object has been passed.
+                } else if (options.storage_method !== null && typeof(options.storage_method) === 'object') {
 
                     storage = options.storage_method;
 
@@ -62,7 +63,7 @@
 
                     // check for the data-squirrel attribute.
                     var dataAttribute = $form.attr('data-squirrel'),
-                        storage_key = options.storage_key_prefix + (dataAttribute ? dataAttribute: options.storage_key);
+                        storage_key = options.storage_key_prefix + (dataAttribute ? dataAttribute : options.storage_key);
 
                     switch (action) {
                         case 'CLEAR':
@@ -226,59 +227,63 @@
 
     }); // end jQuery extend.
 
+    // METHODS
+
     // stash or grab a value from our session store object.
     var stash = function(storage, storage_key, key, value) {
 
-            // get the squirrel storage object.
-            var store = JSON.parse(storage.getItem(storage_key));
+        // get the squirrel storage object.
+        var store = JSON.parse(storage.getItem(storage_key));
 
-            // if it doesn't exist, create an empty object.
-            if (store === null) {
+        // if it doesn't exist, create an empty object.
+        if (store === null) {
 
-                store = {};
+            store = {};
 
-            }
+        }
 
-            // if a value isn't specified.
-            if (typeof(value) === 'undefined' || value === null) {
+        // if a value isn't specified.
+        if (typeof(value) === 'undefined' || value === null) {
 
-                // return the store value if the store value exists; otherwise, null.
-                return typeof(store[key]) !== 'undefined' ? store[key] : null;
+            // return the store value if the store value exists; otherwise, null.
+            return typeof(store[key]) !== 'undefined' ? store[key] : null;
 
-            }
+        }
 
-            // if a value is specified.
-            // create an append object literal.
-            var append = {};
+        // if a value is specified.
+        // create an append object literal.
+        var append = {};
 
-            // add the new value to the object that we'll append to the store object.
-            append[key] = value;
+        // add the new value to the object that we'll append to the store object.
+        append[key] = value;
 
-            // extend the squirrel store object.
-            // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
-            $.extend(store, append);
+        // extend the squirrel store object.
+        // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
+        $.extend(store, append);
 
-            // re-session the squirrel store again.
-            storage.setItem(storage_key, JSON.stringify(store));
+        // re-session the squirrel store again.
+        storage.setItem(storage_key, JSON.stringify(store));
 
-            // return the value.
-            return value;
+        // return the value.
+        return value;
 
-        },
-        // clear the sessionStorage key based on the options specified.
-        unstash = function(storage, storage_key) {
+    };
 
-            // clear value for our storage key.
-            storage.removeItem(storage_key);
+    // clear the sessionStorage key based on the options specified.
+    var unstash = function(storage, storage_key) {
 
-        },
-        // sanitize a particular string option.
-        sanitize = function(key, defaultKey) {
+        // clear value for our storage key.
+        storage.removeItem(storage_key);
 
-            // if a string type and is not whitespace, then return the key; otherwise the default key.
-            return typeof(key) === 'string' && key.trim().length > 0 ? key : defaultKey;
+    };
 
-        };
+    // sanitize a particular string option.
+    var sanitize = function(key, defaultKey) {
+
+        // if a string type and is not whitespace, then return the key; otherwise the default key.
+        return typeof(key) === 'string' && key.trim().length > 0 ? key : defaultKey;
+
+    };
 
     // DEFAULTS
     // default options for squirrel.js.
