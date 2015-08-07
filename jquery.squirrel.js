@@ -22,19 +22,19 @@
                 var storage = null;
 
                 // either 'local' or 'session' has been passed if this is true.
-                if (typeof(options.storage_method) === 'string') {
+                if (isString(options.storage_method)) {
 
                     storage = options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
                     // an object that could be a valid storage object has been passed.
-                } else if (options.storage_method !== null && typeof(options.storage_method) === 'object') {
+                } else if (options.storage_method !== null && isObject(options.storage_method)) {
 
                     storage = options.storage_method;
 
                 }
 
                 // if null or the storage object does not contain the valid functions required, then return this.
-                if (storage === null || !(typeof(storage) === 'object' && 'getItem' in storage && 'removeItem' in storage && 'setItem' in storage)) {
+                if (storage === null || !(isObject(storage) && 'getItem' in storage && 'removeItem' in storage && 'setItem' in storage)) {
 
                     // to maintain chaining in jQuery.
                     return this;
@@ -42,7 +42,7 @@
                 }
 
                 // check the action is valid and convert to uppercase.
-                action = typeof(action) === 'string' && /^(?:CLEAR|REMOVE|OFF|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
+                action = isString(action) && /^(?:CLEAR|REMOVE|OFF|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
 
                 // strings related to the find functions and event handling.
                 var eventFields = 'input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)',
@@ -94,11 +94,11 @@
                                     value = null;
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
-                                if (name === undefined) {
+                                if (isUndefined(name)) {
                                     name = $elem.attr('id');
 
                                     // a name attribute is required to store the element data.
-                                    if (name === undefined) {
+                                    if (isUndefined(name)) {
                                         return;
                                     }
                                 }
@@ -114,7 +114,7 @@
                                             // checkboxes.
                                             var checkedValue = $elem.attr('value');
 
-                                            if (typeof(checkedValue) !== 'string') {
+                                            if (!isString(checkedValue)) {
                                                 checkedValue = '';
                                             }
 
@@ -153,7 +153,7 @@
 
                                         if (value !== null) {
 
-                                            $.each(typeof(value) !== 'object' ? [value] : value, function(index, option) {
+                                            $.each(!$.isArray(value) ? [value] : value, function(index, option) {
 
                                                 $elem.find('option').filter(function() {
 
@@ -180,11 +180,11 @@
                                     name = $elem.attr('name');
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
-                                if (name === undefined) {
+                                if (isUndefined(name)) {
                                     name = $elem.attr('id');
 
                                     // a name attribute is required to store the element data.
-                                    if (name === undefined) {
+                                    if (isUndefined(name)) {
                                         return;
                                     }
                                 }
@@ -193,7 +193,7 @@
                                 var value = $elem.attr('value'),
 
                                     // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
-                                    stashName = (this.type === 'checkbox' && value !== undefined) ? name + value : name;
+                                    stashName = (this.type === 'checkbox' && !isUndefined(value)) ? name + value : name;
 
                                 stash(storage, storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
 
@@ -210,7 +210,7 @@
                             $form.on('submit.squirrel.js', function() {
 
                                 // if not a boolean datatype or is equal to true, then clear the storage.
-                                if (typeof(options.clear_on_submit) !== 'boolean' || options.clear_on_submit) {
+                                if (!isBoolean(options.clear_on_submit) || options.clear_on_submit) {
 
                                     unstash(storage, storage_key);
 
@@ -230,7 +230,7 @@
     // METHODS
 
     // stash or grab a value from our session store object.
-    var stash = function(storage, storage_key, key, value) {
+    var stash = function (storage, storage_key, key, value) {
 
         // get the squirrel storage object.
         var store = JSON.parse(storage.getItem(storage_key));
@@ -243,10 +243,10 @@
         }
 
         // if a value isn't specified.
-        if (typeof(value) === 'undefined' || value === null) {
+        if (isUndefined(value) || value === null) {
 
             // return the store value if the store value exists; otherwise, null.
-            return typeof(store[key]) !== 'undefined' ? store[key] : null;
+            return !isUndefined(store[key]) ? store[key] : null;
 
         }
 
@@ -270,18 +270,46 @@
     };
 
     // clear the sessionStorage key based on the options specified.
-    var unstash = function(storage, storage_key) {
+    var unstash = function (storage, storage_key) {
 
         // clear value for our storage key.
         storage.removeItem(storage_key);
 
     };
 
+    // check if value is a boolean datatype.
+    var isBoolean = function (value) {
+
+        return $.type(value) === 'boolean';
+
+    };
+
+    // check if value is an object.
+    var isObject = function (value) {
+
+        return $.type(value) === 'object';
+
+    };
+
+    // check if a value is a string datatype.
+    var isString = function (value) {
+
+        return $.type(value) === 'string';
+
+    };
+
+    // check if a value is undefined.
+    var isUndefined = function (value) {
+
+        return value === undefined;
+
+    };
+
     // sanitize a particular string option.
-    var sanitize = function(key, defaultKey) {
+    var sanitize = function (key, defaultKey) {
 
         // if a string type and is not whitespace, then return the key; otherwise the default key.
-        return typeof(key) === 'string' && key.trim().length > 0 ? key : defaultKey;
+        return isString(key) && key.trim().length > 0 ? key : defaultKey;
 
     };
 
