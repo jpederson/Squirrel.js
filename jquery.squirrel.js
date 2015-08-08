@@ -1,3 +1,5 @@
+/* global jQuery */
+
 /*
  * squirrel.js
  * http://github.com/jpederson/Squirrel.js
@@ -321,13 +323,13 @@
         storage_key: 'squirrel',
         storage_key_prefix: ''
     };
+    
+    // onload.
+    $(function() {
+
+        // load all forms that have the squirrel class  or data-squirrel attribute associated with them.
+        $('form.squirrel, form[data-squirrel]').squirrel();
+
+    });
 
 })(jQuery, window, document);
-
-// onload.
-$(function() {
-
-    // load all forms that have the squirrel class  or data-squirrel attribute associated with them.
-    $('form.squirrel, form[data-squirrel]').squirrel();
-
-});
