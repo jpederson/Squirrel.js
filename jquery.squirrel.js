@@ -260,7 +260,8 @@
         append[key] = value;
 
         // extend the squirrel store object.
-        // in ES6 this can be shortened to just $.extend(store, {[key]: value}).
+        // in ES6 this can be shortened to just $.extend(store, {[key]: value}), as there would be no need
+        // to create a temporary store.
         $.extend(store, append);
 
         // re-session the squirrel store again.
@@ -293,10 +294,10 @@
 
     };
 
-    // check if a value is a string datatype.
+    // check if a value is a string datatype and has a length greater than zero (trims whitespace).
     var isString = function (value) {
 
-        return $.type(value) === 'string';
+        return $.type(value) === 'string' && value.trim().length > 0;
 
     };
 
@@ -310,8 +311,8 @@
     // sanitize a particular string option.
     var sanitize = function (key, defaultKey) {
 
-        // if a string type and is not whitespace, then return the key; otherwise the default key.
-        return isString(key) && key.trim().length > 0 ? key : defaultKey;
+        // if a string type, then return the key; otherwise the default key.
+        return isString(key) ? key : defaultKey;
 
     };
 
@@ -323,7 +324,7 @@
         storage_key: 'squirrel',
         storage_key_prefix: ''
     };
-    
+
     // onload.
     $(function() {
 
