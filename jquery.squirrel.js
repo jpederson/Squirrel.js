@@ -7,14 +7,14 @@
  * Licensed under the MIT, GPL licenses.
  * Version: 0.1.7
  */
-; (function($, window, document, undefined) {
+; (function ($, window, document, undefined) {
 
     // PLUGIN LOGIC
 
     $.fn.extend({
 
         // naming our jQuery plugin function.
-        squirrel: function(action, options) {
+        squirrel: function (action, options) {
 
                 // set our options from the defaults, overriding with the
                 // parameter we pass into this function.
@@ -57,7 +57,7 @@
 
                 // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining in jQuery.
-                return this.each(function() {
+                return this.each(function () {
 
                     // store a jQuery object for the form so we can use it
                     // inside the other bindings.
@@ -84,7 +84,7 @@
 
                         default:
                             // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
-                            $form.find('*').filter(findFields).each(function() {
+                            $form.find('*').filter(findFields).each(function () {
 
                                 // cache the jQuery object.
                                 var $elem = $(this),
@@ -155,9 +155,9 @@
 
                                         if (value !== null) {
 
-                                            $.each(!$.isArray(value) ? [value] : value, function(index, option) {
+                                            $.each(!$.isArray(value) ? [value] : value, function (index, option) {
 
-                                                $elem.find('option').filter(function() {
+                                                $elem.find('option').filter(function () {
 
                                                     var $option = $(this);
                                                     return ($option.val() === option || $option.html() === option);
@@ -173,7 +173,7 @@
 
                             // UPDATE VALUES FOR ALL FIELDS ON CHANGE.
                             // track changes in fields and store values as they're typed.
-                            $form.find(eventFields).on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function() {
+                            $form.find(eventFields).on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function () {
 
                                 // cache the jQuery object.
                                 var $elem = $(this),
@@ -202,14 +202,14 @@
                             });
 
                             // when the reset button is clicked, clear the storage.
-                            $form.find(eventReset).on('click.squirrel.js', function() {
+                            $form.find(eventReset).on('click.squirrel.js', function () {
 
                                 unstash(storage, storage_key);
 
                             });
 
                             // clear the storage on submit.
-                            $form.on('submit.squirrel.js', function() {
+                            $form.on('submit.squirrel.js', function () {
 
                                 // if not a boolean datatype or is equal to true, then clear the storage.
                                 if (!isBoolean(options.clear_on_submit) || options.clear_on_submit) {
@@ -326,7 +326,7 @@
     };
 
     // onload.
-    $(function() {
+    $(function () {
 
         // load all forms that have the squirrel class  or data-squirrel attribute associated with them.
         $('form.squirrel, form[data-squirrel]').squirrel();
