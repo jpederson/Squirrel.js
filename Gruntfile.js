@@ -1,16 +1,16 @@
 
 module.exports = function(grunt) {
 
-    // load all grunt tasks
+    // Load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
 
     grunt.initConfig({
 
-        // watch for changes and trigger compass, jshint, uglify and livereload
+        // Watch for changes to the main file to trigger uglification and hinting
         watch: {
             js: {
                 files: ['jquery.squirrel.js'],
-                tasks: ['uglify','jshint'],
+                tasks: ['jshint', 'uglify'],
                 options: {
                     livereload: true,
                 },
@@ -28,7 +28,7 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    // nested, compact, compressed, expanded
+                    // Options are 'nested', 'compact', 'compressed', 'expanded'
                     style: 'compressed'
                 },
                 files: {
@@ -37,22 +37,7 @@ module.exports = function(grunt) {
             }
         },
 
-        // uglify to concat & minify
-        uglify: {
-            js: {
-                files: {
-                    'jquery.squirrel.min.js': 'jquery.squirrel.js',
-                },
-                options: {
-                    compress: {
-                        dead_code: true,
-                        drop_console: true,
-                        unused: true
-                    }
-                }
-            }
-        },
-
+        // Check the code meets the following standards
         jshint: {
             all: ['jquery.squirrel.js'],
             options: {
@@ -67,10 +52,30 @@ module.exports = function(grunt) {
                   '$': true
                 }
             }
+        },
+
+        // Uglify aka minify the main file
+        uglify: {
+            js: {
+                files: {
+                    'jquery.squirrel.min.js': 'jquery.squirrel.js',
+                },
+                options: {
+                    // See the uglify documentation for more details
+                    compress: {
+                        dead_code: true,
+                        drop_console: true,
+                        unused: true
+                    }
+                }
+            }
         }
 
     });
 
-    // register task
+    // Register the default task to watch for any changes to the main files
     grunt.registerTask('default', ['watch']);
+
+    // 'grunt jshint' to check the syntax
+    // 'grunt uglify' to uglify the main file
 };
