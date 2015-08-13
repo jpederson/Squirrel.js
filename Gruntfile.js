@@ -63,8 +63,11 @@ module.exports = function(grunt) {
                 options: {
                     // See the uglify documentation for more details
                     compress: {
+                        comparisons: true,
+                        conditionals: true,
                         dead_code: true,
                         drop_console: true,
+                        unsafe: true,
                         unused: true
                     }
                 }
