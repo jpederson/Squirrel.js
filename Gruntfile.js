@@ -24,7 +24,7 @@ module.exports = function(grunt) {
             }
         },
 
-        // we use the Sass
+        // Compile the saas file to css
         sass: {
             dist: {
                 options: {
