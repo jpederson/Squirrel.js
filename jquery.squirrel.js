@@ -28,7 +28,7 @@
 
                     storage = options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
-                    // an object that could be a valid storage object has been passed.
+                // an object that could be a valid storage object has been passed.
                 } else if (options.storage_method !== null && isObject(options.storage_method)) {
 
                     storage = options.storage_method;
