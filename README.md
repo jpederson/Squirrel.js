@@ -21,22 +21,22 @@ See the documentation to learn about advanced configuration options, including u
 
 The following types of fields are supported by Squirrel.js.
 
-- `input[type=text]`
-- `input[type=radio]`
 - `input[type=checkbox]`
-- `input[type=number]` (value must be numeric to refill correctly)
-- `input[type=email]`
-- `input[type=date]`
-- `input[type=datetime]`
-- `input[type=datetime-local]`
 - `input[type=color]`
-- `input[type=range]`
+- `input[type=date]`
+- `input[type=datetime-local]`
+- `input[type=datetime]`
+- `input[type=email]`
 - `input[type=month]`
-- `input[type=week]`
-- `input[type=time]`
+- `input[type=number]` (value must be numeric to refill correctly)
+- `input[type=radio]`
+- `input[type=range]`
 - `input[type=search]`
 - `input[type=tel]`
+- `input[type=text]`
+- `input[type=time]`
 - `input[type=url]`
+- `input[type=week]`
 - `textarea`
 - `select`
 
@@ -64,7 +64,7 @@ Browser support for both sessionStorage and JSON (required to parse/stringify da
 
 ### Contributing
 
-To contribute, you'll need [nodejs](http://nodejs.org/) and [Grunt](http://gruntjs.com/) installed. Fork and clone the repo, then visit the directory in the terminal and type `npm install`. After that you can simply run the `grunt` command to watch the files in the project. It'll automatically lint, test, compile, and minify the plugin files so you can just code.
+To contribute, you'll need [NodeJS](http://nodejs.org/) and [Grunt](http://gruntjs.com/) installed. Fork/clone the repo, then visit the directory in the terminal and type `npm install`. After that you can simply run the `grunt` command to watch the files in the project. It'll automatically lint, test, compile, and minify the plugin files so you can just code.
 
 [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
