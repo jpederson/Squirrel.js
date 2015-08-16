@@ -280,21 +280,21 @@
 
     };
 
-    // check if value is a boolean datatype.
+    // check if a value is a boolean datatype.
     var isBoolean = function (value) {
 
         return $.type(value) === 'boolean';
 
     };
 
-    // check if value is an object.
+    // check if a value is an object.
     var isObject = function (value) {
 
         return $.type(value) === 'object';
 
     };
 
-    // check if a value is a string datatype and has a length greater than zero (trims whitespace).
+    // check if a value is a string datatype and has a length greater than zero (trims whitespace as well).
     var isString = function (value) {
 
         return $.type(value) === 'string' && value.trim().length > 0;
@@ -317,6 +317,7 @@
     };
 
     // DEFAULTS
+
     // default options for squirrel.js.
     $.fn.squirrel.options = {
         clear_on_submit: true,
