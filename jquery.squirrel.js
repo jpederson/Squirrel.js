@@ -52,8 +52,11 @@
                     findFields = 'input[id], input[name], select[id], select[name], textarea[id], textarea[name]';
 
                 // sanitize the options strings.
-                options.storage_key = sanitize(options.storage_key, 'squirrel');
-                options.storage_key_prefix = sanitize(options.storage_key_prefix, '');
+                options.storage_key = sanitizeOption(options.storage_key, 'squirrel');
+                options.storage_key_prefix = sanitizeOption(options.storage_key_prefix, '');
+
+                // cache this for usage later on.
+                var self = this;
 
                 // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining in jQuery.
@@ -83,7 +86,7 @@
                             break;
 
                         default:
-                            // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF DOM
+                            // LOAD VALUES FOR ALL FORMS FROM LOCAL/SESSION STORAGE IN ORDER OF THE DOM
                             $form.find('*').filter(findFields).each(function () {
 
                                 // cache the jQuery object.
@@ -101,7 +104,9 @@
 
                                     // a name attribute is required to store the element data.
                                     if (isUndefined(name)) {
-                                        return;
+
+                                        // return self to continue chaining.
+                                        return self;
                                     }
                                 }
 
@@ -123,7 +128,10 @@
                                             value = stash(storage, storage_key, name + checkedValue);
 
                                             if (value !== null && value !== this.checked) {
+                                                // set the checkbox state to 'true', if the value is true
                                                 this.checked = (value === true);
+
+                                                // trigger the 'change' event.
                                                 $elem.trigger('change');
                                             }
 
@@ -134,6 +142,8 @@
 
                                             if (value !== null && value !== this.checked) {
                                                 this.checked = ($elem.val() === value);
+
+                                                // trigger the 'change' event.
                                                 $elem.trigger('change');
                                             }
 
@@ -143,6 +153,8 @@
                                             value = stash(storage, storage_key, name);
 
                                             if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
+
+                                                // set the value and trigger the 'change' event.
                                                 $elem.val(value).trigger('change');
                                             }
 
@@ -162,7 +174,12 @@
                                                     var $option = $(this);
                                                     return ($option.val() === option || $option.html() === option);
 
-                                                }).prop('selected', true).trigger('change');
+                                                })
+                                                // set selected to true.
+                                                .prop('selected', true)
+
+                                                // trigger the 'change' event.
+                                                .trigger('change');
 
                                             });
                                         }
@@ -261,7 +278,7 @@
 
         // extend the squirrel store object.
         // in ES6 this can be shortened to just $.extend(store, {[key]: value}), as there would be no need
-        // to create a temporary store.
+        // to create a temporary storage object.
         $.extend(store, append);
 
         // re-session the squirrel store again.
@@ -309,7 +326,7 @@
     };
 
     // sanitize a particular string option.
-    var sanitize = function (key, defaultKey) {
+    var sanitizeOption = function (key, defaultKey) {
 
         // if a string type, then return the key; otherwise the default key.
         return isString(key) ? key : defaultKey;
