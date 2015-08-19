@@ -35,7 +35,7 @@
 
                 }
 
-                // if null or the storage object does not contain the valid functions required, then return this.
+                // if null or the storage object doesn't contain the valid functions required, then return this.
                 if (storage === null || !(isObject(storage) && 'getItem' in storage && 'removeItem' in storage && 'setItem' in storage)) {
 
                     // to maintain chaining in jQuery.
@@ -68,7 +68,9 @@
 
                     // check for the data-squirrel attribute.
                     var dataAttribute = $form.attr('data-squirrel'),
-                        storage_key = options.storage_key_prefix + (dataAttribute ? dataAttribute : options.storage_key);
+
+                        // append the custom prefix and determine if the data attribute is valid.
+                        storage_key = options.storage_key_prefix + (isString(dataAttribute) ? dataAttribute : options.storage_key);
 
                     switch (action) {
                         case 'CLEAR':
@@ -105,7 +107,7 @@
                                     // a name attribute is required to store the element data.
                                     if (isUndefined(name)) {
 
-                                        // return self to continue chaining.
+                                        // return self to maintain chaining in jQuery.
                                         return self;
                                     }
                                 }
@@ -200,6 +202,7 @@
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
+                                    // get the id attribute.
                                     name = $elem.attr('id');
 
                                     // a name attribute is required to store the element data.
