@@ -28,7 +28,7 @@
 
                     storage = options.storage_method.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
-                // an object that could be a valid storage object has been passed.
+                    // an object that could be a valid storage object has been passed.
                 } else if (options.storage_method !== null && isObject(options.storage_method)) {
 
                     storage = options.storage_method;
@@ -47,9 +47,9 @@
                 action = isString(action) && /^(?:CLEAR|REMOVE|OFF|STOP)$/i.test(action) ? action.toUpperCase() : 'START';
 
                 // strings related to the find functions and event handling.
-                var eventFields = 'input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)',
-                    eventReset = 'button[type=reset], input[type=reset]',
-                    findFields = 'input[id], input[name], select[id], select[name], textarea[id], textarea[name]';
+                var eventFields = 'input[type!=file]:not(.squirrel-ignore), select:not(.squirrel-ignore), textarea:not(.squirrel-ignore)';
+                var eventReset = 'button[type=reset], input[type=reset]';
+                var findFields = 'input[id], input[name], select[id], select[name], textarea[id], textarea[name]';
 
                 // sanitize the options strings.
                 options.storage_key = sanitizeOption(options.storage_key, 'squirrel');
@@ -67,10 +67,10 @@
                     var $form = $(this);
 
                     // check for the data-squirrel attribute.
-                    var dataAttribute = $form.attr('data-squirrel'),
+                    var dataAttribute = $form.attr('data-squirrel');
 
-                        // append the custom prefix and determine if the data attribute is valid.
-                        storage_key = options.storage_key_prefix + (isString(dataAttribute) ? dataAttribute : options.storage_key);
+                    // append the custom prefix and determine if the data attribute is valid.
+                    var storage_key = options.storage_key_prefix + (isString(dataAttribute) ? dataAttribute : options.storage_key);
 
                     switch (action) {
                         case 'CLEAR':
@@ -92,13 +92,13 @@
                             $form.find('*').filter(findFields).each(function () {
 
                                 // cache the jQuery object.
-                                var $elem = $(this),
+                                var $elem = $(this);
 
-                                    // get the name attribute.
-                                    name = $elem.attr('name'),
+                                // get the name attribute.
+                                var name = $elem.attr('name');
 
-                                    // declare a variable to hold the value from the storage.
-                                    value = null;
+                                // declare a variable to hold the value from the storage.
+                                var value = null;
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
@@ -173,12 +173,12 @@
 
                                                 $elem.find('option').filter(function () {
 
-                                                    var $option = $(this);
-                                                    return ($option.val() === option || $option.html() === option);
+                                                        var $option = $(this);
+                                                        return ($option.val() === option || $option.html() === option);
 
-                                                })
-                                                // set selected to true.
-                                                .prop('selected', true)
+                                                    })
+                                                    // set selected to true.
+                                                    .prop('selected', true)
 
                                                 // trigger the 'change' event.
                                                 .trigger('change');
@@ -195,10 +195,10 @@
                             $form.find(eventFields).on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function () {
 
                                 // cache the jQuery object.
-                                var $elem = $(this),
+                                var $elem = $(this);
 
-                                    // get the name attribute.
-                                    name = $elem.attr('name');
+                                // get the name attribute.
+                                var name = $elem.attr('name');
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
@@ -212,10 +212,10 @@
                                 }
 
                                 // get the value attribute.
-                                var value = $elem.attr('value'),
+                                var value = $elem.attr('value');
 
-                                    // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
-                                    stashName = (this.type === 'checkbox' && !isUndefined(value)) ? name + value : name;
+                                // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
+                                var stashName = (this.type === 'checkbox' && !isUndefined(value)) ? name + value : name;
 
                                 stash(storage, storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
 
@@ -252,7 +252,7 @@
     // METHODS
 
     // stash or grab a value from our session store object.
-    var stash = function (storage, storage_key, key, value) {
+    function stash(storage, storage_key, key, value) {
 
         // get the squirrel storage object.
         var store = JSON.parse(storage.getItem(storage_key));
@@ -290,51 +290,51 @@
         // return the value.
         return value;
 
-    };
+    }
 
     // clear the sessionStorage key based on the options specified.
-    var unstash = function (storage, storage_key) {
+    function unstash(storage, storage_key) {
 
         // clear value for our storage key.
         storage.removeItem(storage_key);
 
-    };
+    }
 
     // check if a value is a boolean datatype.
-    var isBoolean = function (value) {
+    function isBoolean(value) {
 
         return $.type(value) === 'boolean';
 
-    };
+    }
 
     // check if a value is an object.
-    var isObject = function (value) {
+    function isObject(value) {
 
         return $.type(value) === 'object';
 
-    };
+    }
 
     // check if a value is a string datatype and has a length greater than zero (trims whitespace as well).
-    var isString = function (value) {
+    function isString(value) {
 
         return $.type(value) === 'string' && value.trim().length > 0;
 
-    };
+    }
 
     // check if a value is undefined.
-    var isUndefined = function (value) {
+    function isUndefined(value) {
 
         return value === undefined;
 
-    };
+    }
 
     // sanitize a particular string option.
-    var sanitizeOption = function (key, defaultKey) {
+    function sanitizeOption(key, defaultKey) {
 
         // if a string type, then return the key; otherwise the default key.
         return isString(key) ? key : defaultKey;
 
-    };
+    }
 
     // DEFAULTS
 
