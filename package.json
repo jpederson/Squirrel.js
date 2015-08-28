@@ -1,18 +1,19 @@
 {
-    "name" : "squirreljs",
-    "version" : "0.1.8",
-    "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "git@github.com:jpederson/Squirrel.js.git"
-    },
-    "devDependencies" : {
-        "grunt" :                       "latest",
-        "grunt-contrib-cssmin":         "*",
-        "grunt-contrib-sass":           "*",
-        "grunt-contrib-uglify":         "*",
-        "grunt-contrib-jshint":         "*",
-        "grunt-contrib-watch":          "*",
-        "matchdep":                     "*"
-    }
+  "name": "squirreljs",
+  "version": "0.1.8",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jpederson/Squirrel.js.git"
+  },
+  "devDependencies": {
+    "grunt": "latest",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-sass": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-jsbeautifier": "^0.2.10",
+    "matchdep": "*"
+  }
 }

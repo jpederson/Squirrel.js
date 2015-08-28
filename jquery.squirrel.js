@@ -7,7 +7,8 @@
  * Licensed under the MIT, GPL licenses.
  * Version: 0.1.8
  */
-; (function ($, window, document, undefined) {
+; // jshint ignore:line
+(function ($, window, document, undefined) {
 
     // PLUGIN LOGIC
 
