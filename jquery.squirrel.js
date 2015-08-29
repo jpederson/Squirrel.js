@@ -57,7 +57,7 @@
                 options.storage_key_prefix = sanitizeOption(options.storage_key_prefix, '');
 
                 // cache this for usage later on.
-                var self = this;
+                var _this = this;
 
                 // iterate through all the matching elements and return
                 // the jQuery object to preserve chaining in jQuery.
@@ -108,8 +108,8 @@
                                     // a name attribute is required to store the element data.
                                     if (isUndefined(name)) {
 
-                                        // return self to maintain chaining in jQuery.
-                                        return self;
+                                        // return _this to maintain chaining in jQuery.
+                                        return _this;
                                     }
                                 }
 
