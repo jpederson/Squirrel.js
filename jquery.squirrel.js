@@ -95,9 +95,6 @@
                                 // get the name attribute.
                                 var name = $elem.attr('name');
 
-                                // declare a variable to hold the value from the storage.
-                                var value = null;
-
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
                                     name = $elem.attr('id');
@@ -109,6 +106,9 @@
                                         return $form;
                                     }
                                 }
+
+                                // declare a variable to hold the value from the storage.
+                                var value = null;
 
                                 // tagName returns an uppercase value in HTML5.
                                 switch (this.tagName) {
