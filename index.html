@@ -284,7 +284,7 @@
             var $this = $(this);
 
             // display an alert. This would normally be a submission e.g. ajax.
-            alert('Form submitted. The form will now be reset and the session data cleared.');
+            window.alert('Form submitted. The form will now be reset and the session data cleared.');
 
             // reset the form, by triggering a reset event.
             $this.trigger('reset');
