@@ -90,14 +90,14 @@
                             $form.find('*').filter(findFields).each(function () {
 
                                 // cache the jQuery object.
-                                var $elem = $(this);
+                                var $element = $(this);
 
                                 // get the name attribute.
-                                var name = $elem.attr('name');
+                                var name = $element.attr('name');
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
-                                    name = $elem.attr('id');
+                                    name = $element.attr('id');
 
                                     // a name attribute is required to store the element data.
                                     if (isUndefined(name)) {
@@ -114,12 +114,12 @@
                                 switch (this.tagName) {
                                     case 'INPUT':
                                     case 'TEXTAREA':
-                                        var type = $elem.attr('type');
+                                        var type = $element.attr('type');
 
                                         if (type === 'checkbox') {
 
                                             // checkboxes.
-                                            var checkedValue = $elem.attr('value');
+                                            var checkedValue = $element.attr('value');
 
                                             if (!isString(checkedValue)) {
                                                 checkedValue = '';
@@ -132,7 +132,7 @@
                                                 this.checked = (value === true);
 
                                                 // trigger the 'change' event.
-                                                $elem.trigger('change');
+                                                $element.trigger('change');
                                             }
 
                                         } else if (type === 'radio') {
@@ -141,10 +141,10 @@
                                             value = stash(storage, storage_key, name);
 
                                             if (value !== null && value !== this.checked) {
-                                                this.checked = ($elem.val() === value);
+                                                this.checked = ($element.val() === value);
 
                                                 // trigger the 'change' event.
-                                                $elem.trigger('change');
+                                                $element.trigger('change');
                                             }
 
                                         } else {
@@ -152,10 +152,10 @@
                                             // load the text values from the storage.
                                             value = stash(storage, storage_key, name);
 
-                                            if (value !== null && !$elem.is('[readonly]') && $elem.is(':enabled') && $elem.val() !== value) {
+                                            if (value !== null && !$element.is('[readonly]') && $element.is(':enabled') && $element.val() !== value) {
 
                                                 // set the value and trigger the 'change' event.
-                                                $elem.val(value).trigger('change');
+                                                $element.val(value).trigger('change');
                                             }
 
                                         }
@@ -169,7 +169,7 @@
 
                                             $.each(!$.isArray(value) ? [value] : value, function (index, option) {
 
-                                                $elem.find('option').filter(function () {
+                                                $element.find('option').filter(function () {
 
                                                         var $option = $(this);
                                                         return ($option.val() === option || $option.html() === option);
@@ -193,15 +193,15 @@
                             $form.find(eventFields).on('blur.squirrel.js keyup.squirrel.js change.squirrel.js', function () {
 
                                 // cache the jQuery object.
-                                var $elem = $(this);
+                                var $element = $(this);
 
                                 // get the name attribute.
-                                var name = $elem.attr('name');
+                                var name = $element.attr('name');
 
                                 // if the name attribute doesn't exist, determine the id attribute instead.
                                 if (isUndefined(name)) {
                                     // get the id attribute.
-                                    name = $elem.attr('id');
+                                    name = $element.attr('id');
 
                                     // a name attribute is required to store the element data.
                                     if (isUndefined(name)) {
@@ -210,12 +210,12 @@
                                 }
 
                                 // get the value attribute.
-                                var value = $elem.attr('value');
+                                var value = $element.attr('value');
 
                                 // pre-append the name attribute with the value if a checkbox; otherwise, use the name only.
                                 var stashName = (this.type === 'checkbox' && !isUndefined(value)) ? name + value : name;
 
-                                stash(storage, storage_key, stashName, this.type === 'checkbox' ? $elem.prop('checked') : $elem.val());
+                                stash(storage, storage_key, stashName, this.type === 'checkbox' ? $element.prop('checked') : $element.val());
 
                             });
 
