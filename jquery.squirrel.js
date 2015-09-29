@@ -1,5 +1,3 @@
-/* global jQuery */
-
 /*
  * squirrel.js
  * http://github.com/jpederson/Squirrel.js
@@ -8,7 +6,7 @@
  * Version: 0.1.8
  */
 ; // jshint ignore:line
-(function ($, window, document, undefined) {
+(function (window, $, undefined) {
 
     // PLUGIN LOGIC
 
@@ -352,4 +350,5 @@
 
     });
 
-})(jQuery, window, document);
+})(this, this.jQuery);
+
