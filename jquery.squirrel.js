@@ -241,7 +241,7 @@
                             });
 
                             // clear the storage on submit.
-                            $form.on(_events.SUBMIT, function onClick() {
+                            $form.on(_events.SUBMIT, function onSubmit() {
 
                                 // if not a boolean datatype or is equal to true, then clear the storage.
                                 if (!isBoolean(options.clearOnSubmit) || options.clearOnSubmit) {
