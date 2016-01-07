@@ -1,0 +1,16 @@
+{
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "latedef": true,
+    "noarg": true,
+    "nocomma": true,
+    "nonew": true,
+    "undef": true,
+    "unused": true,
+    "eqnull": false,
+    "browser": true,
+    "devel": false,
+    "jquery": true,
+    "esnext": true
+}

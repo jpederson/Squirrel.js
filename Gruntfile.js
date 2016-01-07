@@ -1,4 +1,4 @@
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
     // Load all grunt tasks
     require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks);
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
                 options: {
                     livereload: true,
                 },
-            }
+            },
         },
 
         // Compile the saas file to css
@@ -28,29 +28,20 @@ module.exports = function (grunt) {
             dist: {
                 options: {
                     // Options are 'nested', 'compact', 'compressed', 'expanded'
-                    style: 'compressed'
+                    style: 'compressed',
                 },
                 files: {
-                    'example.css': 'example.scss'
-                }
-            }
+                    'example.css': 'example.scss',
+                },
+            },
         },
 
         // Check the code meets the following standards
         jshint: {
             all: ['jquery.squirrel.js'],
             options: {
-                curly: true,
-                eqeqeq: true,
-                eqnull: true,
-                notypeof: true,
-                undef: true,
-                browser: true,
-                globals: {
-                    jQuery: true,
-                    '$': true
-                }
-            }
+                jshintrc: '.jshintrc',
+            },
         },
 
         // Uglify aka minify the main file
@@ -67,10 +58,10 @@ module.exports = function (grunt) {
                         dead_code: true,
                         drop_console: true,
                         unsafe: true,
-                        unused: true
-                    }
-                }
-            }
+                        unused: true,
+                    },
+                },
+            },
         },
 
         // Beautify the main script using JSBeautifier
@@ -78,7 +69,7 @@ module.exports = function (grunt) {
             files: ['jquery.squirrel.js'],
             options: {
                 js: {
-                    brace_style: "collapse",
+                    brace_style: 'collapse',
                     break_chained_methods: false,
                     end_with_newline: true,
                     eval_code: false,
@@ -96,9 +87,9 @@ module.exports = function (grunt) {
                     space_in_empty_paren: false,
                     space_in_paren: false,
                     unescape_strings: false,
-                    wrap_line_length: 0
-                }
-            }
+                    wrap_line_length: 0,
+                },
+            },
         },
 
     });

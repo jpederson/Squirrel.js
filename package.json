@@ -7,6 +7,7 @@
     "url": "git@github.com:jpederson/Squirrel.js.git"
   },
   "devDependencies": {
+    "del": "^2.2.0",
     "grunt": "latest",
     "grunt-contrib-cssmin": "*",
     "grunt-contrib-jshint": "*",
@@ -14,6 +15,8 @@
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
     "grunt-jsbeautifier": "^0.2.10",
+    "gulp-sass": "^2.1.1",
+    "jshint": "^2.8.0",
     "matchdep": "*"
   }
 }
