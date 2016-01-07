@@ -6,7 +6,7 @@
  * Version: 0.1.8
  */
 ; // jshint ignore:line
-(function jQuerySquirrelNamespace(window, $, undefined) {
+(function jQuerySquirrelNamespace(window, $) {
 
     // PLUGIN LOGIC
 
@@ -37,6 +37,7 @@
                 storage = options.storageMethod.toUpperCase() === 'LOCAL' ? window.localStorage : window.sessionStorage;
 
                 // an object that could be a valid storage object has been passed.
+
             } else if (options.storageMethod !== null && isObject(options.storageMethod)) {
 
                 storage = options.storageMethod;
@@ -107,6 +108,7 @@
 
                             // if the name attribute doesn't exist, determine the id attribute instead.
                             if (isUndefined(name)) {
+
                                 name = $element.attr('id');
 
                                 // a name attribute is required to store the element data.
@@ -114,7 +116,9 @@
 
                                     // return $form to maintain chaining in jQuery.
                                     return $form;
+
                                 }
+
                             }
 
                             // declare a variable to hold the value from the storage.
@@ -132,17 +136,21 @@
                                         var checkedValue = $element.attr('value');
 
                                         if (!isString(checkedValue)) {
+
                                             checkedValue = '';
+
                                         }
 
                                         value = stash(storage, storageKey, name + checkedValue);
 
                                         if (value !== null && value !== this.checked) {
+
                                             // set the checkbox state to 'true', if the value is true
                                             this.checked = (value === true);
 
                                             // trigger the 'change' event.
                                             $element.trigger('change');
+
                                         }
 
                                     } else if (type === 'radio') {
@@ -151,10 +159,12 @@
                                         value = stash(storage, storageKey, name);
 
                                         if (value !== null && value !== this.checked) {
+
                                             this.checked = ($element.val() === value);
 
                                             // trigger the 'change' event.
                                             $element.trigger('change');
+
                                         }
 
                                     } else {
@@ -166,6 +176,7 @@
 
                                             // set the value and trigger the 'change' event.
                                             $element.val(value).trigger('change');
+
                                         }
 
                                     }
@@ -195,8 +206,12 @@
                                             .trigger('change');
 
                                         });
+
                                     }
 
+                                    break;
+
+                                default:
                                     break;
                             }
 
@@ -214,13 +229,17 @@
 
                             // if the name attribute doesn't exist, determine the id attribute instead.
                             if (isUndefined(name)) {
+
                                 // get the id attribute.
                                 name = $element.attr('id');
 
                                 // a name attribute is required to store the element data.
                                 if (isUndefined(name)) {
+
                                     return;
+
                                 }
+
                             }
 
                             // get the value attribute.
@@ -338,7 +357,7 @@
     // check if a value is a string datatype and has a length greater than zero (trims whitespace as well).
     function isString(value) {
 
-        return $.type(value) === 'string' && value.trim().length > 0;
+        return $.type(value) === 'string' && $.trim(value).length > 0;
 
     }
 
