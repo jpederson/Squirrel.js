@@ -77,3 +77,9 @@ These folks make this project possible, and are happy to help you integrate it i
 - @jpederson ([website](http://jpederson.com))
 - @softwarespot ([website](http://softwarespot.wordpress.com/))
 
+*****
+
+### License
+
+This project is proudly licensed under the MIT License
+
