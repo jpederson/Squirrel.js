@@ -15,6 +15,8 @@ Additionally, you may simply specify a `data-squirrel` attribute to your form wi
 
 See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
 
+![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Accrue.js.svg)
+
 *****
 
 ### Supported Fields
@@ -76,10 +78,4 @@ These folks make this project possible, and are happy to help you integrate it i
 
 - @jpederson ([website](http://jpederson.com))
 - @softwarespot ([website](http://softwarespot.wordpress.com/))
-
-*****
-
-### License
-
-This project is proudly licensed under the MIT License
 
