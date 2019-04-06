@@ -15,7 +15,7 @@ Additionally, you may simply specify a `data-squirrel` attribute to your form wi
 
 See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
 
-![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![Built with Grunt](https://img.shields.io/badge/built%20with-bower-orange.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
+![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
 
 *****
 
