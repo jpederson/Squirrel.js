@@ -2,6 +2,17 @@
 
 Store form values in HTML5 sessionStorage automatically as the user types with this jQuery plugin.
 
+#### [Demo](https://jpederson.com/Squirrel.js)
+#### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
+
+*****
+
+![Available on Github](https://img.shields.io/github/release/jpederson/Squirrel.js.svg) ![Available on NPM](https://img.shields.io/npm/v/squirreljs.svg) ![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
+
+*****
+
+### Get Started
+
 To get started, simply include the plugin after your jQuery library is loaded, and add a class of `squirrel` to your form. The plugin does its own bindings for that class, otherwise you can set it up to target your forms using the code below:
 
 ```js
@@ -10,12 +21,7 @@ $('.my-form').squirrel();
 
 Additionally, you may simply specify a `data-squirrel` attribute to your form with its value set to your desired `storage_key` value. This way, you can have several forms with the same input names, and they'll be stored separately in local/sessionStorage.
 
-#### [Demo](http://squirreljs.com)
-#### [Documentation](https://github.com/jpederson/Squirrel.js/wiki)
-
 See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
-
-![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
 
 *****
 
