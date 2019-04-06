@@ -15,7 +15,7 @@ Additionally, you may simply specify a `data-squirrel` attribute to your form wi
 
 See the documentation to learn about advanced configuration options, including using localStorage instead of sessionStorage.
 
-![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Accrue.js.svg)
+![Available on Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![Built with Grunt](https://img.shields.io/badge/built%20with-bower-orange.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
 
 *****
 
@@ -68,7 +68,7 @@ Browser support for both sessionStorage and JSON (required to parse/stringify da
 
 To contribute, you'll need [NodeJS](http://nodejs.org/) and [Grunt](http://gruntjs.com/) installed. Fork/clone the repo, then visit the directory in the terminal and type `npm install`. After that you can simply run the `grunt` command to watch the files in the project. It'll automatically lint, test, compile, and minify the plugin files so you can just code.
 
-[![Built with Grunt](https://gruntjs.com/cdn/builtwith.png)](http://gruntjs.com/)
+![Built with Grunt](https://img.shields.io/badge/built%20with-bower-orange.svg)
 
 *****
 
