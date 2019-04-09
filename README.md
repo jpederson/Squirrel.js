@@ -7,7 +7,17 @@ Store form values in HTML5 sessionStorage automatically as the user types with t
 
 *****
 
-![Github](https://img.shields.io/github/release/jpederson/Squirrel.js.svg) ![NPM](https://img.shields.io/npm/v/squirreljs.svg) ![Bower](https://img.shields.io/bower/v/squirrel.js.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
+![Github](https://img.shields.io/github/release/jpederson/Squirrel.js.svg) ![NPM](https://img.shields.io/npm/v/squirreljs.svg) ![MIT](https://img.shields.io/github/license/jpederson/Squirrel.js.svg) 
+
+*****
+
+### Install
+
+#### npm
+
+```shell
+npm install squirreljs
+```
 
 *****
 
