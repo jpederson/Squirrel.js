@@ -194,16 +194,16 @@
 
                                             $element.find('option').filter(function eachOption() {
 
-                                                var $option = $(this);
-                                                return ($option.val() === option || $option.html() === option);
+                                                    var $option = $(this);
+                                                    return ($option.val() === option || $option.html() === option);
 
-                                            })
+                                                })
 
-                                            // set selected to true.
-                                            .prop('selected', true)
+                                                // set selected to true.
+                                                .prop('selected', true)
 
-                                            // trigger the 'change' event.
-                                            .trigger('change');
+                                                // trigger the 'change' event.
+                                                .trigger('change');
 
                                         });
 
